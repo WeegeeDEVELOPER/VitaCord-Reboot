@@ -1,0 +1,7 @@
+# Hashes of file build rules.
+c1134159c382a28bb0c0b7e5d753680b CMakeFiles/VitaCord_Reboot.self
+f8cc32eb4b2c2c69cafff207d0e350df CMakeFiles/VitaCord_Reboot.vpk
+8c5fb936c1ec50cb31a0c2426ba4f560 VitaCord_Reboot.elf.velf
+c103ba9dec8baa1140d2cc3010cd7972 VitaCord_Reboot.self.out
+249b91e8be7fa5104557b1c85a5b63b8 VitaCord_Reboot.vpk.out
+f5794f1d6a8922da776ddfce1d7cbe59 VitaCord_Reboot.vpk_param.sfo
