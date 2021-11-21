@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/mnt/c/Users/bashe/Downloads/VitaCord-1.5fix1/VitaCord-1.5fix1/src/Discord.hpp
+/mnt/c/Users/bashe/Desktop/vita_projects/VitaCord_reboot/src/Discord.hpp
 string
 -
 vector
@@ -24,11 +24,11 @@ vita2d.h
 unordered_map
 -
 VitaNet.hpp
-/mnt/c/Users/bashe/Downloads/VitaCord-1.5fix1/VitaCord-1.5fix1/src/VitaNet.hpp
+/mnt/c/Users/bashe/Desktop/vita_projects/VitaCord_reboot/src/VitaNet.hpp
 json.hpp
-/mnt/c/Users/bashe/Downloads/VitaCord-1.5fix1/VitaCord-1.5fix1/src/json.hpp
+/mnt/c/Users/bashe/Desktop/vita_projects/VitaCord_reboot/src/json.hpp
 
-/mnt/c/Users/bashe/Downloads/VitaCord-1.5fix1/VitaCord-1.5fix1/src/GUIElements.hpp
+/mnt/c/Users/bashe/Desktop/vita_projects/VitaCord_reboot/src/GUIElements.hpp
 vita2d.h
 -
 string
@@ -36,11 +36,11 @@ string
 vector
 -
 
-/mnt/c/Users/bashe/Downloads/VitaCord-1.5fix1/VitaCord-1.5fix1/src/VitaGUI.cpp
+/mnt/c/Users/bashe/Desktop/vita_projects/VitaCord_reboot/src/VitaGUI.cpp
 VitaGUI.hpp
-/mnt/c/Users/bashe/Downloads/VitaCord-1.5fix1/VitaCord-1.5fix1/src/VitaGUI.hpp
+/mnt/c/Users/bashe/Desktop/vita_projects/VitaCord_reboot/src/VitaGUI.hpp
 log.hpp
-/mnt/c/Users/bashe/Downloads/VitaCord-1.5fix1/VitaCord-1.5fix1/src/log.hpp
+/mnt/c/Users/bashe/Desktop/vita_projects/VitaCord_reboot/src/log.hpp
 istream
 -
 sstream
@@ -56,27 +56,27 @@ psp2/rtc.h
 debugnet.h
 -
 
-/mnt/c/Users/bashe/Downloads/VitaCord-1.5fix1/VitaCord-1.5fix1/src/VitaGUI.hpp
+/mnt/c/Users/bashe/Desktop/vita_projects/VitaCord_reboot/src/VitaGUI.hpp
 vita2d.h
 -
 GUIElements.hpp
-/mnt/c/Users/bashe/Downloads/VitaCord-1.5fix1/VitaCord-1.5fix1/src/GUIElements.hpp
+/mnt/c/Users/bashe/Desktop/vita_projects/VitaCord_reboot/src/GUIElements.hpp
 VitaIME.hpp
-/mnt/c/Users/bashe/Downloads/VitaCord-1.5fix1/VitaCord-1.5fix1/src/VitaIME.hpp
+/mnt/c/Users/bashe/Desktop/vita_projects/VitaCord_reboot/src/VitaIME.hpp
 Discord.hpp
-/mnt/c/Users/bashe/Downloads/VitaCord-1.5fix1/VitaCord-1.5fix1/src/Discord.hpp
+/mnt/c/Users/bashe/Desktop/vita_projects/VitaCord_reboot/src/Discord.hpp
 vector
 -
 string
 -
 
-/mnt/c/Users/bashe/Downloads/VitaCord-1.5fix1/VitaCord-1.5fix1/src/VitaIME.hpp
+/mnt/c/Users/bashe/Desktop/vita_projects/VitaCord_reboot/src/VitaIME.hpp
 stdio.h
 -
 string
 -
 
-/mnt/c/Users/bashe/Downloads/VitaCord-1.5fix1/VitaCord-1.5fix1/src/VitaNet.hpp
+/mnt/c/Users/bashe/Desktop/vita_projects/VitaCord_reboot/src/VitaNet.hpp
 psp2/sysmodule.h
 -
 psp2/net/net.h
@@ -92,7 +92,7 @@ string
 string.h
 -
 
-/mnt/c/Users/bashe/Downloads/VitaCord-1.5fix1/VitaCord-1.5fix1/src/json.hpp
+/mnt/c/Users/bashe/Desktop/vita_projects/VitaCord_reboot/src/json.hpp
 algorithm
 -
 array
@@ -146,7 +146,7 @@ utility
 vector
 -
 
-/mnt/c/Users/bashe/Downloads/VitaCord-1.5fix1/VitaCord-1.5fix1/src/log.hpp
+/mnt/c/Users/bashe/Desktop/vita_projects/VitaCord_reboot/src/log.hpp
 string
 -
 string.h

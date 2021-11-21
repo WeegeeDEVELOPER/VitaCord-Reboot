@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /mnt/c/Users/bashe/Downloads/VitaCord-1.5fix1/VitaCord-1.5fix1
+CMAKE_SOURCE_DIR = /mnt/c/Users/bashe/Desktop/vita_projects/VitaCord_reboot
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /mnt/c/Users/bashe/Downloads/VitaCord-1.5fix1/VitaCord-1.5fix1
+CMAKE_BINARY_DIR = /mnt/c/Users/bashe/Desktop/vita_projects/VitaCord_reboot
 
 # Utility rule file for VitaCord_Reboot.self.
 
@@ -54,15 +54,15 @@ CMAKE_BINARY_DIR = /mnt/c/Users/bashe/Downloads/VitaCord-1.5fix1/VitaCord-1.5fix
 include CMakeFiles/VitaCord_Reboot.self.dir/progress.make
 
 CMakeFiles/VitaCord_Reboot.self: VitaCord_Reboot.self.out
-	/usr/bin/cmake -E copy /mnt/c/Users/bashe/Downloads/VitaCord-1.5fix1/VitaCord-1.5fix1/VitaCord_Reboot.self.out VitaCord_Reboot.self
+	/usr/bin/cmake -E copy /mnt/c/Users/bashe/Desktop/vita_projects/VitaCord_reboot/VitaCord_Reboot.self.out VitaCord_Reboot.self
 
 VitaCord_Reboot.self.out: VitaCord_Reboot.elf.velf
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/mnt/c/Users/bashe/Downloads/VitaCord-1.5fix1/VitaCord-1.5fix1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Creating SELF VitaCord_Reboot.self"
-	/usr/local/vitasdk/bin/vita-make-fself -c -s /mnt/c/Users/bashe/Downloads/VitaCord-1.5fix1/VitaCord-1.5fix1/VitaCord_Reboot.elf.velf /mnt/c/Users/bashe/Downloads/VitaCord-1.5fix1/VitaCord-1.5fix1/VitaCord_Reboot.self.out
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/mnt/c/Users/bashe/Desktop/vita_projects/VitaCord_reboot/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Creating SELF VitaCord_Reboot.self"
+	/usr/local/vitasdk/bin/vita-make-fself -c -s /mnt/c/Users/bashe/Desktop/vita_projects/VitaCord_reboot/VitaCord_Reboot.elf.velf /mnt/c/Users/bashe/Desktop/vita_projects/VitaCord_reboot/VitaCord_Reboot.self.out
 
 VitaCord_Reboot.elf.velf: VitaCord_Reboot.elf
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/mnt/c/Users/bashe/Downloads/VitaCord-1.5fix1/VitaCord-1.5fix1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Converting to Sony ELF VitaCord_Reboot.elf.velf"
-	/usr/local/vitasdk/bin/vita-elf-create /mnt/c/Users/bashe/Downloads/VitaCord-1.5fix1/VitaCord-1.5fix1/VitaCord_Reboot.elf /mnt/c/Users/bashe/Downloads/VitaCord-1.5fix1/VitaCord-1.5fix1/VitaCord_Reboot.elf.velf
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/mnt/c/Users/bashe/Desktop/vita_projects/VitaCord_reboot/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Converting to Sony ELF VitaCord_Reboot.elf.velf"
+	/usr/local/vitasdk/bin/vita-elf-create /mnt/c/Users/bashe/Desktop/vita_projects/VitaCord_reboot/VitaCord_Reboot.elf /mnt/c/Users/bashe/Desktop/vita_projects/VitaCord_reboot/VitaCord_Reboot.elf.velf
 
 VitaCord_Reboot.self: CMakeFiles/VitaCord_Reboot.self
 VitaCord_Reboot.self: VitaCord_Reboot.self.out
@@ -81,6 +81,6 @@ CMakeFiles/VitaCord_Reboot.self.dir/clean:
 .PHONY : CMakeFiles/VitaCord_Reboot.self.dir/clean
 
 CMakeFiles/VitaCord_Reboot.self.dir/depend:
-	cd /mnt/c/Users/bashe/Downloads/VitaCord-1.5fix1/VitaCord-1.5fix1 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /mnt/c/Users/bashe/Downloads/VitaCord-1.5fix1/VitaCord-1.5fix1 /mnt/c/Users/bashe/Downloads/VitaCord-1.5fix1/VitaCord-1.5fix1 /mnt/c/Users/bashe/Downloads/VitaCord-1.5fix1/VitaCord-1.5fix1 /mnt/c/Users/bashe/Downloads/VitaCord-1.5fix1/VitaCord-1.5fix1 /mnt/c/Users/bashe/Downloads/VitaCord-1.5fix1/VitaCord-1.5fix1/CMakeFiles/VitaCord_Reboot.self.dir/DependInfo.cmake --color=$(COLOR)
+	cd /mnt/c/Users/bashe/Desktop/vita_projects/VitaCord_reboot && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /mnt/c/Users/bashe/Desktop/vita_projects/VitaCord_reboot /mnt/c/Users/bashe/Desktop/vita_projects/VitaCord_reboot /mnt/c/Users/bashe/Desktop/vita_projects/VitaCord_reboot /mnt/c/Users/bashe/Desktop/vita_projects/VitaCord_reboot /mnt/c/Users/bashe/Desktop/vita_projects/VitaCord_reboot/CMakeFiles/VitaCord_Reboot.self.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/VitaCord_Reboot.self.dir/depend
 

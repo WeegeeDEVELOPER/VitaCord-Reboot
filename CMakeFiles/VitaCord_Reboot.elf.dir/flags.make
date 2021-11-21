@@ -6,5 +6,5 @@ CXX_FLAGS =  -Wl,-q -g -fpermissive -std=c++11 -Wall
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/mnt/c/Users/bashe/Downloads/VitaCord-1.5fix1/VitaCord-1.5fix1/../common 
+CXX_INCLUDES = -I/mnt/c/Users/bashe/Desktop/vita_projects/VitaCord_reboot/../common 
 

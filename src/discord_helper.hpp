@@ -46,7 +46,6 @@ struct user {
 	std::string id;
 	std::string name;
 	std::string icon;
-	
 };
 #endif
 

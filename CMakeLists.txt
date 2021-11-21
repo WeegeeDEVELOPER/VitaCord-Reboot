@@ -111,6 +111,8 @@ vita_create_vpk(${SHORT_NAME}.vpk ${VITA_TITLEID} ${SHORT_NAME}.self
   FILE assets/images/Vitacord-Background-8BIT.png assets/images/Vitacord-Background-8BIT.png
   FILE assets/images/Vitacord-statbar-battery.png assets/images/Vitacord-statbar-battery.png
   FILE assets/images/Vitacord-USERIcondefault-8BIT.png assets/images/Vitacord-USERIcondefault-8BIT.png
+  FILE assets/images/Vitacord-GUILDIcondefault-8BIT.png assets/images/Vitacord-GUILDIcondefault-8BIT.png
+  FILE assets/images/Vitacord-CHANNELIcondefault-8BIT.png assets/images/Vitacord-CHANNELIcondefault-8BIT.png
   FILE assets/images/Vitacord-sidebar-default-usericon.png assets/images/Vitacord-sidebar-default-usericon.png
   FILE assets/images/Vitacord-statbar-battery-charge.png assets/images/Vitacord-statbar-battery-charge.png
   

@@ -121,6 +121,8 @@ class VitaGUI{
 		vita2d_texture *guildsBGImage;
 		vita2d_texture *dmIconImage;
 		vita2d_texture *userIconDefaultImage;
+		vita2d_texture *guildIconDefaultImage;
+		vita2d_texture *channelIconDefaultImage;
 		vita2d_texture *statbarIconImage;
 		vita2d_texture *statbarBatteryImage;
 		vita2d_texture *statbarBatteryChargeImage;

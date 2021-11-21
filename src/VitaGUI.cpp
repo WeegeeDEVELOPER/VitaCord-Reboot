@@ -46,6 +46,8 @@ VitaGUI::VitaGUI(){
 	guildsBGImage = vita2d_load_PNG_file("app0:assets/images/Vitacord-GuildsBG-8BIT.png");
 	dmIconImage = vita2d_load_PNG_file("app0:assets/images/Vitacord-DMIcon-8BIT.png");
 	userIconDefaultImage = vita2d_load_PNG_file("app0:assets/images/Vitacord-USERIcondefault-8BIT.png");
+	guildIconDefaultImage = vita2d_load_PNG_file("app0:assets/images/Vitacord-GUILDIcondefault-8BIT.png");
+	channelIconDefaultImage = vita2d_load_PNG_file("app0:assets/images/Vitacord-CHANNELIcondefault-8BIT.png");
 	statbarIconImage = vita2d_load_PNG_file("app0:assets/images/Vitacord-statbar-icon.png");
 	statbarBatteryImage = vita2d_load_PNG_file("app0:assets/images/Vitacord-statbar-battery.png");
 	statbarBatteryChargeImage = vita2d_load_PNG_file("app0:assets/images/Vitacord-statbar-battery-charge.png");
@@ -1160,8 +1162,10 @@ void VitaGUI::DrawGuildsOnSidebar(){
 	for(unsigned int i = 0 ; i < guildBoxes.size() ; i++){
 		height = guildScrollY + i * GUILD_HEIGHT;
 		if(height < MAX_DRAW_HEIGHT && height  > MIN_DRAW_HEIGHT){
-			vita2d_font_draw_text(vita2dFont[GUILD_TITLE_TEXT_SIZE_PIXEL] , guildScrollX + 8, 100 + guildScrollY + i * GUILD_HEIGHT + 40, RGBA8(255,255,255,255), GUILD_TITLE_TEXT_SIZE_PIXEL, guildBoxes[i].name.c_str());
-			
+			vita2d_font_draw_text(vita2dFont[GUILD_TITLE_TEXT_SIZE_PIXEL] , guildScrollX + 58, 100 + guildScrollY + i * GUILD_HEIGHT + 40, RGBA8(255,255,255,255), GUILD_TITLE_TEXT_SIZE_PIXEL, guildBoxes[i].name.c_str());
+		}
+		if (guildIconDefaultImage != NULL){
+			vita2d_draw_texture(guildIconDefaultImage, 8, 4 + guildScrollY + i * GUILD_HEIGHT + 40);
 		}
 	}
 }
@@ -1174,7 +1178,10 @@ void VitaGUI::DrawChannelsOnSidebar(){
 				vita2d_draw_rectangle(channelScrollX , 100 + channelScrollY + i * CHANNEL_HEIGHT, 215 , CHANNEL_HEIGHT, RGBA8(40, 43, 48, 255));
 				vita2d_draw_rectangle(channelScrollX , 100 + channelScrollY + i * CHANNEL_HEIGHT, 4 , CHANNEL_HEIGHT, RGBA8(95, 118, 198, 255));
 			}
-			vita2d_font_draw_text(vita2dFont[CHANNEL_TITLE_TEXT_SIZE_PIXEL] , channelScrollX + 8, 100 + channelScrollY + i * CHANNEL_HEIGHT + 42  , RGBA8(255,255,255,255), CHANNEL_TITLE_TEXT_SIZE_PIXEL, channelBoxes[i].name.c_str());
+			vita2d_font_draw_text(vita2dFont[CHANNEL_TITLE_TEXT_SIZE_PIXEL] , channelScrollX + 38, 100 + channelScrollY + i * CHANNEL_HEIGHT + 42  , RGBA8(255,255,255,255), CHANNEL_TITLE_TEXT_SIZE_PIXEL, channelBoxes[i].name.c_str());
+		}
+		if (channelIconDefaultImage != NULL){
+			vita2d_draw_texture(channelIconDefaultImage, 8, 16 + channelScrollY + i * CHANNEL_HEIGHT + 42);
 		}
 	}
 	
@@ -1204,8 +1211,8 @@ void VitaGUI::DrawMessages(){
 				
 			}
 			
-				vita2d_font_draw_text(vita2dFont[26], 283, yPos + 26, RGBA8(255, 255, 255, 255), 26, messageBoxes[i].username.c_str());
-				vita2d_font_draw_text(vita2dFont[32], 293, yPos + 50, RGBA8(255, 255, 255, 255), 22, messageBoxes[i].content.c_str());
+				vita2d_font_draw_text(vita2dFont[26], 300, yPos + 26, RGBA8(255, 255, 255, 255), 22, messageBoxes[i].username.c_str());
+				vita2d_font_draw_text(vita2dFont[32], 300, yPos + 55, RGBA8(255, 255, 255, 255), 22, messageBoxes[i].content.c_str());
 				 
 			if( messageBoxes[i].showAttachmentAsImage ){
 				vita2d_draw_rectangle( 240 , yPos + height - ATTACHMENT_HEIGHT - 16 , ATTACHMENT_HEIGHT , ATTACHMENT_HEIGHT , RGBA8(0x9F , 0x9F , 0x9F , 0xFF) );
@@ -1232,7 +1239,7 @@ void VitaGUI::DrawMessages(){
 			for(unsigned int em = 0; em < messageBoxes[i].emojis.size() ; em++){
 				if(discordPtr->spritesheetEmoji  != NULL){
 					vita2d_draw_texture_part(discordPtr->spritesheetEmoji 
-					, 293 + ( messageBoxes[i].emojis[em].posX * discordPtr->emojiWidth )
+					, 300 + ( messageBoxes[i].emojis[em].posX * discordPtr->emojiWidth )
 					, yPos + 32 + messageBoxes[i].emojis[em].posY * discordPtr->emojiHeight
 					, messageBoxes[i].emojis[em].spriteSheetX * discordPtr->emojiWidth
 					, messageBoxes[i].emojis[em].spriteSheetY * discordPtr->emojiHeight
@@ -1245,7 +1252,7 @@ void VitaGUI::DrawMessages(){
 			// When user icons is implemented, add vita2d_texture pointer to user data.
 			// Then apply either the default icon pointer or loaded user icon pionter to this vita2d_texture pointer.
 			// For now we'll just draw the default icon for all users.
-			vita2d_draw_texture(userIconDefaultImage, 243, yPos + 16);
+			vita2d_draw_texture(userIconDefaultImage, 243, yPos + 6);
 		}
 
 		
@@ -1302,17 +1309,17 @@ void VitaGUI::DrawDirectMessageMessages(){
 				
 			}
 			
-				vita2d_font_draw_text(vita2dFont[15], 283, yPos + 26, RGBA8(255, 255, 255, 255), 26, directMessageMessagesBoxes[i].username.c_str());
+				vita2d_font_draw_text(vita2dFont[15], 300, yPos + 26, RGBA8(255, 255, 255, 255), 22, directMessageMessagesBoxes[i].username.c_str());
 
-				vita2d_font_draw_text(vita2dFont[15], 293, yPos + 50, RGBA8(255, 255, 255, 255), 22, directMessageMessagesBoxes[i].content.c_str());
+				vita2d_font_draw_text(vita2dFont[15], 300, yPos + 55, RGBA8(255, 255, 255, 255), 22, directMessageMessagesBoxes[i].content.c_str());
 
 			
 			// draw default icon.
 			// When user icons is implemented, add vita2d_texture pointer to user data.
 			// Then apply either the default icon pointer or loaded user icon pionter to this vita2d_texture pointer.
 			// For now we'll just draw the default icon for all users.
-			vita2d_draw_texture(userIconDefaultImage, 243, yPos + 16);
-			}
+			vita2d_draw_texture(userIconDefaultImage, 243, yPos + 6);
+		}
 
 		
 		yPos += height; // add message height to yPos
