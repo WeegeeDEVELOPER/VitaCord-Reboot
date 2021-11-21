@@ -1,2 +1,2 @@
 # VitaCord: Reboot
-VitaCord: Reboot is VitaCord but with way more added features and things to do, currently WIP.
+VitaCord: Reboot is VitaCord but with way more added features and a better UI.
