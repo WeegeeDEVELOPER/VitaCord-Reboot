@@ -1,5 +1,0 @@
-/mnt/c/Users/bashe/Desktop/vita_projects/VitaCord_reboot/CMakeFiles/rebuild_cache.dir
-/mnt/c/Users/bashe/Desktop/vita_projects/VitaCord_reboot/CMakeFiles/edit_cache.dir
-/mnt/c/Users/bashe/Desktop/vita_projects/VitaCord_reboot/CMakeFiles/VitaCord_Reboot.vpk.dir
-/mnt/c/Users/bashe/Desktop/vita_projects/VitaCord_reboot/CMakeFiles/VitaCord_Reboot.self.dir
-/mnt/c/Users/bashe/Desktop/vita_projects/VitaCord_reboot/CMakeFiles/VitaCord_Reboot.elf.dir

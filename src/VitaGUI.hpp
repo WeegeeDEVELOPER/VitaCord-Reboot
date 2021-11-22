@@ -116,6 +116,8 @@ class VitaGUI{
 		//vita2d_pgf *pgf;
 		vita2d_texture *backgroundImage;
 		vita2d_texture *backgroundImageDay;
+
+		vita2d_texture *sideAvatar;
 		
 		vita2d_texture *loginFormImage;
 		vita2d_texture *loadingImage;

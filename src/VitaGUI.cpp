@@ -43,6 +43,10 @@ VitaGUI::VitaGUI(){
 	std::string bgPathDay = "app0:assets/images/Vitacord-Background-8BIT-day.png";
 	backgroundImage = vita2d_load_PNG_file(bgPath.c_str());
 	backgroundImageDay = vita2d_load_PNG_file(bgPathDay.c_str());
+
+	std::string avatarPath = "https://discordapp.com/avatars/" + discordPtr->client.id + "/" + discordPtr->client.avatar + ".png";
+	sideAvatar = vita2d_load_PNG_file(avatarPath.c_str());
+
 	loginFormImage = vita2d_load_PNG_file("app0:assets/images/Vitacord-LoginForm-8BIT.png");
 	loadingImage = vita2d_load_PNG_file("app0:assets/images/Vitacord-Loading-8BIT.png");
 	guildsBGImage = vita2d_load_PNG_file("app0:assets/images/Vitacord-GuildsBG-8BIT.png");
@@ -137,7 +141,7 @@ void VitaGUI::updateBoxes(){
 
 void VitaGUI::DrawStatusBar() {
 	
-	vita2d_draw_rectangle(0, 0, 960, 30, RGBA8(174, 85, 44, 255));
+	vita2d_draw_rectangle(0, 0, 960, 30, RGBA8(46, 49, 54, 255));
 	vita2d_draw_texture(statbarIconImage, 10, 7);
 	
 	// Battery
@@ -293,9 +297,17 @@ void VitaGUI::Draw(){
 		// BOTTOM SIDEPANEL
 		vita2d_draw_rectangle(0, 479, 230, 1, RGBA8(5, 5, 6, 255));
 		vita2d_draw_rectangle(0, 480, 230, 64, RGBA8(40, 43, 48, 255));
-		vita2d_draw_texture(sidepanelStateIconImage, 14, 493); // sidepanelStateIconImage = user icon or Vitacord-default-usericon.png
-		vita2d_font_draw_text(vita2dFont[18], 70, 514, RGBA8(255, 255, 255, 255), 18, panelUsername.c_str());
-		vita2d_font_draw_text(vita2dFont[15], 70, 530, RGBA8(255, 255, 255, 255), 15, panelUserDiscriminator.c_str()); // create a vita2dfont for each font-size or your font will get messed up.
+
+		if (sideAvatar != NULL){
+			vita2d_draw_texture(sideAvatar, 14, 493);
+		}
+		else{
+			vita2d_draw_texture(sidepanelStateIconImage, 14, 493);
+		}
+
+		//vita2d_draw_texture(sidepanelStateIconImage, 14, 493); // sidepanelStateIconImage = user icon or Vitacord-default-usericon.png
+		vita2d_font_draw_text(vita2dFont[18], 70, 514, RGBA8(255, 255, 255, 255), 22, panelUsername.c_str());
+		vita2d_font_draw_text(vita2dFont[15], 70, 540, RGBA8(255, 255, 255, 255), 14, panelUserDiscriminator.c_str()); // create a vita2dfont for each font-size or your font will get messed up.
 		
 		vita2d_draw_texture(dmIconImage, 166, 41); // DM ICON 
 		
@@ -933,6 +945,9 @@ void VitaGUI::setChannelBoxes(){
 			amount++;
 		}
 	}
+
+	//need to add emoji support to channel names
+
 	channelScrollYMin = -((amount)*CHANNEL_HEIGHT - 100) ;
 	channelScrollYMax = 0;
 }
@@ -1262,6 +1277,19 @@ void VitaGUI::DrawMessages(){
 			// When user icons is implemented, add vita2d_texture pointer to user data.
 			// Then apply either the default icon pointer or loaded user icon pionter to this vita2d_texture pointer.
 			// For now we'll just draw the default icon for all users.
+
+			/*
+			std::string avatarPath = "https://discordapp.com/avatars/" + discordPtr->user.id + "/" + discordPtr->user.avatar + ".png";
+			vita2d_texture *avatar = vita2d_load_PNG_file(avatarPath.c_str());
+
+			if (avatar != NULL){
+				vita2d_draw_texture(avatar, 243, yPos + 6);
+			}
+			else{
+				vita2d_draw_texture(userIconDefaultImage, 243, yPos + 6);
+			}
+			*/
+
 			vita2d_draw_texture(userIconDefaultImage, 243, yPos + 6);
 		}
 
