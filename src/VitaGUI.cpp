@@ -1298,7 +1298,18 @@ void VitaGUI::DrawMessages(){
 			}
 			*/
 
-			vita2d_draw_texture(userIconDefaultImage, 243, yPos + 6);
+
+			VitaNet::curlDiscordGetAvatars(("https://discordapp.com/avatars/" + messageBoxes[i].id + "/" + messageBoxes[i].avatar + ".png"), (discordPtr->token), ("ux0:data/vitacord/cache/avatars/users/"));
+			std::string avatarLocation = "ux0:data/vitacord/cache/avatars/users/" + messageBoxes[i].avatar + ".png";
+			vita2d_texture *_newAvatar = vita2d_load_PNG_file(avatarLocation.c_str());
+
+			if (_newAvatar != NULL){
+				vita2d_draw_texture(_newAvatar, 243, yPos + 6);
+			}
+			else{
+				vita2d_draw_texture(userIconDefaultImage, 243, yPos + 6);
+			}
+			
 		}
 
 		

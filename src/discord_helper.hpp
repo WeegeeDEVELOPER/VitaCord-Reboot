@@ -15,6 +15,7 @@ struct messageauthor{
 struct message{
 	std::string timestamp;
 	std::string id;
+	//std::string avatar;
 	struct messageauthor author;
 	std::string content;
 };

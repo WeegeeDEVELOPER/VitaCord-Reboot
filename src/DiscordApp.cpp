@@ -169,12 +169,14 @@ void DiscordApp::saveUserDataToFile(std::string mail , std::string pass , std::s
 
 void DiscordApp::Start(){
 	
-	std::string directories[8] = { "ux0:data" , "ux0:data/vitacord" , "ux0:data/vitacord/user" ,"ux0:data/vitacord/attachments"
+	std::string directories[12] = { "ux0:data" , "ux0:data/vitacord" , "ux0:data/vitacord/user" ,"ux0:data/vitacord/attachments"
 									, "ux0:data/vitacord/attachments/images" , "ux0:data/vitacord/attachments/other"
-										, "ux0:data/vitacord/attachments/thumbnails" , "ux0:data/vitacord/settings" };
+										, "ux0:data/vitacord/attachments/thumbnails" , "ux0:data/vitacord/settings", 
+										"ux0:data/vitacord/cache", "ux0:data/vitacord/cache/avatars",
+										"ux0:data/vitacord/cache/avatars/users" , "ux0:data/vitacord/cache/avatars/servers" };
 	
 	
-	for(int i = 0 ; i < 8 ; i++){
+	for(int i = 0 ; i < 12 ; i++){
 		struct SceIoStat * dirStat = (SceIoStat*)malloc(sizeof(SceIoStat));
 		if(sceIoGetstat(directories[i].c_str() , dirStat) < 0){
 			sceIoMkdir(directories[i].c_str() , 0777);

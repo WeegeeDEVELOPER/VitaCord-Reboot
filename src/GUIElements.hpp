@@ -53,6 +53,8 @@ typedef struct{
 	int messageHeight;
 	std::string username;
 	std::string content;
+	std::string id;
+	std::string avatar;
 	std::string channelID;
 	std::string messageID;
 	bool showAttachmentAsImage;

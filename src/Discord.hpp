@@ -62,6 +62,7 @@ class Discord{
 			std::string mentions;
 			std::string timestamp;
 			std::string id;
+			std::string avatar;
 			std::vector<message_emoji> emojis;
 		}message;
 		typedef struct{

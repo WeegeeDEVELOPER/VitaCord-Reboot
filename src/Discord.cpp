@@ -1,4 +1,5 @@
 #include "Discord.hpp"
+#include "GUIElements.hpp"
 #include "log.hpp"
 
 #include <bitset>
@@ -368,6 +369,7 @@ void Discord::getChannelMessages(int channelIndex){
 				int iR = messagesAmount - i - 1;
 
 				message newMessage;
+				messagebox newMessageBox;
 
 				if(!j_complete[iR].is_null()){
 
@@ -411,14 +413,18 @@ void Discord::getChannelMessages(int channelIndex){
 
 					if(!j_complete[iR]["author"]["id"].is_null()){
 						newMessage.author.id = j_complete[iR]["author"]["id"].get<std::string>();
+						newMessageBox.id = j_complete[iR]["author"]["id"].get<std::string>();
 					}else{
 						newMessage.author.id = "0";
+						newMessageBox.id = "0";
 					}
 
 					if(!j_complete[iR]["author"]["avatar"].is_null()){
 						newMessage.author.avatar = j_complete[iR]["author"]["avatar"].get<std::string>();
+						newMessageBox.avatar = j_complete[iR]["author"]["avatar"].get<std::string>();
 					}else{
 						newMessage.author.avatar = "0";
+						newMessageBox.avatar = "0";
 					}
 
 					newMessage.attachment.isEmpty = true;

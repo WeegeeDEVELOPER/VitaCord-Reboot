@@ -369,6 +369,61 @@ VitaNet::http_response  VitaNet::curlDiscordDownloadImage(std::string url , std:
 }
 
 
+static void VitaNet::curlDiscordGetAvatars(std::string url, std::string authtoken, std::string dest){
+	VitaNet::http_response resp;
+	std::string authorizationHeader = "Authorization: " + authtoken;
+	
+	
+	SceUID file = sceIoOpen( dest.c_str(), SCE_O_WRONLY | SCE_O_CREAT, 0777);
+	
+	CURL *curl;
+	CURLcode res;
+	curl = curl_easy_init();
+	if(curl) {
+		struct stringcurl body;
+		init_string(&body);
+		struct stringcurl header;
+		init_string(&header);
+		curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+		curl_easy_setopt(curl, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36");
+		curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 0L);
+		curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
+		curl_easy_setopt(curl, CURLOPT_CONNECTTIMEOUT, 10L);
+		curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
+		curl_easy_setopt(curl, CURLOPT_NOPROGRESS, 1L);
+		curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data_to_disk);
+		curl_easy_setopt(curl, CURLOPT_WRITEDATA, &file);
+		curl_easy_setopt(curl, CURLOPT_HEADERFUNCTION, writefunc);
+		curl_easy_setopt(curl, CURLOPT_HEADERDATA, &header);
+		struct curl_slist *headerchunk = NULL;
+		headerchunk = curl_slist_append(headerchunk, "Accept: */*");
+		headerchunk = curl_slist_append(headerchunk, "Content-Type: application/json");
+		headerchunk = curl_slist_append(headerchunk, "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36");
+		headerchunk = curl_slist_append(headerchunk, authorizationHeader.c_str());
+		//headerchunk = curl_slist_append(headerchunk, "Host: discordapp.com");  Setting this will lead to errors when trying to download. should be set depending on location : possible : cdn.discordapp.com or images.discordapp.com
+		headerchunk = curl_slist_append(headerchunk, "Content-Length: 0");
+		res = curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headerchunk);
+		
+		
+		
+		res = curl_easy_perform(curl);
+		curl_easy_getinfo (curl, CURLINFO_RESPONSE_CODE, &resp.httpcode);
+		
+		resp.header = std::string(header.ptr , header.len);
+		resp.body = "";
+		
+		if(res != CURLE_OK){
+			sceIoRemove(dest.c_str());
+		}
+		
+		
+	}
+	sceIoClose(file);
+	curl_easy_cleanup(curl);
+}
+
+
+
 
 
 void VitaNet::init(){

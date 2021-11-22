@@ -34,7 +34,7 @@ class VitaNet{
 		http_response curlDiscordPatch(std::string url , std::string patchData , std::string authtoken);
 		
 		http_response curlDiscordDownloadImage(std::string url , std::string authtoken , std::string file);
-
+		static void curlDiscordGetAvatars(std::string url, std::string authtoken, std::string dest);
 
  
 	
