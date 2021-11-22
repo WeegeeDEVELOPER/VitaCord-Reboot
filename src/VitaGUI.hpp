@@ -115,6 +115,7 @@ class VitaGUI{
 		//vita2d_font *vita2dFontOpenSansEmoji;
 		//vita2d_pgf *pgf;
 		vita2d_texture *backgroundImage;
+		vita2d_texture *backgroundImageDay;
 		
 		vita2d_texture *loginFormImage;
 		vita2d_texture *loadingImage;

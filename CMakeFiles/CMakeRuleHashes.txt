@@ -3,5 +3,5 @@ f055c8359893957cacab043f9018eeb0 CMakeFiles/VitaCord_Reboot.self
 3ae71a1e7682a9d58497bb50eafc8cd5 CMakeFiles/VitaCord_Reboot.vpk
 776982085fce50b6be5be4c3dc54ab58 VitaCord_Reboot.elf.velf
 6bbb5d3bdf3eab07f5f6cdf7d66e836f VitaCord_Reboot.self.out
-c05b6c47380726cdaeb4f5b3c6d62ef9 VitaCord_Reboot.vpk.out
+cd87a16fc3e1beee54e0c75b148ffd2f VitaCord_Reboot.vpk.out
 79a54ac09eb759d9efc1816dc2050229 VitaCord_Reboot.vpk_param.sfo

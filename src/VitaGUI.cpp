@@ -40,7 +40,9 @@ VitaGUI::VitaGUI(){
 	
 	
 	std::string bgPath = "app0:assets/images/Vitacord-Background-8BIT.png";
+	std::string bgPathDay = "app0:assets/images/Vitacord-Background-8BIT-day.png";
 	backgroundImage = vita2d_load_PNG_file(bgPath.c_str());
+	backgroundImageDay = vita2d_load_PNG_file(bgPathDay.c_str());
 	loginFormImage = vita2d_load_PNG_file("app0:assets/images/Vitacord-LoginForm-8BIT.png");
 	loadingImage = vita2d_load_PNG_file("app0:assets/images/Vitacord-Loading-8BIT.png");
 	guildsBGImage = vita2d_load_PNG_file("app0:assets/images/Vitacord-GuildsBG-8BIT.png");
@@ -1149,7 +1151,15 @@ void VitaGUI::DrawLoginScreen(){
 	
 	
 		//vita2d_draw_rectangle(0, 0, 960, 544, RGBA8(114, 137, 217, 255));
-		vita2d_draw_texture( backgroundImage, 0, 0);
+
+		SceDateTime time;
+		sceRtcGetCurrentClockLocalTime(&time);
+		if (time.hour >= 18){
+			vita2d_draw_texture( backgroundImage, 0, 0);
+		}
+		else{
+			vita2d_draw_texture( backgroundImageDay, 0, 0);
+		}
 		vita2d_draw_texture( loginFormImage , 161, 53 );
 		vita2d_font_draw_text(vita2dFont[18] , 438, 181, RGBA8(255,255,255,255), 18, loginTexts[0].c_str());
 		vita2d_font_draw_text(vita2dFont[18] , 438, 261, RGBA8(255,255,255,255), 18, loginTexts[1].c_str());
