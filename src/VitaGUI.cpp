@@ -44,8 +44,8 @@ VitaGUI::VitaGUI(){
 	backgroundImage = vita2d_load_PNG_file(bgPath.c_str());
 	backgroundImageDay = vita2d_load_PNG_file(bgPathDay.c_str());
 
-	std::string avatarPath = "https://discordapp.com/avatars/" + discordPtr->client.id + "/" + discordPtr->client.avatar + ".png";
-	sideAvatar = vita2d_load_PNG_file(avatarPath.c_str());
+	//std::string avatarPath = "https://discordapp.com/avatars/" + discordPtr->client.id + "/" + discordPtr->client.avatar + ".png";
+	//sideAvatar = vita2d_load_PNG_file(avatarPath.c_str());
 
 	loginFormImage = vita2d_load_PNG_file("app0:assets/images/Vitacord-LoginForm-8BIT.png");
 	loadingImage = vita2d_load_PNG_file("app0:assets/images/Vitacord-Loading-8BIT.png");
@@ -141,7 +141,7 @@ void VitaGUI::updateBoxes(){
 
 void VitaGUI::DrawStatusBar() {
 	
-	vita2d_draw_rectangle(0, 0, 960, 30, RGBA8(46, 49, 54, 255));
+	vita2d_draw_rectangle(0, 0, 960, 30, RGBA8(30, 33, 36, 255));
 	vita2d_draw_texture(statbarIconImage, 10, 7);
 	
 	// Battery
@@ -175,7 +175,15 @@ void VitaGUI::DrawStatusBar() {
 	sprintf(timeString, "%02d:%02d %s", (time.hour > 12) ? (time.hour - 12) : ((time.hour == 0) ? 12 : time.hour), time.minute, time.hour >= 12 ? "PM" : "AM");
 	sprintf(string, "%s  %s", dateString, timeString);
 	vita2d_font_draw_text(vita2dFontSmall, 875 - vita2d_font_text_width(vita2dFontSmall, 20, string), 22, RGBA8(255, 255, 255, 255), 20, string);
-	}
+}
+
+void VitaGUI::DrawUserBar(){
+	//vita2d_draw_rectangle(785, 0, 175, 544, RGBA8(46, 49, 54, 255));
+}
+
+void VitaGUI::DrawServerStats(){
+
+}
 
 unsigned int currentEmojiIndexTest = 0;
 unsigned int testFrames = 0;
@@ -298,16 +306,11 @@ void VitaGUI::Draw(){
 		vita2d_draw_rectangle(0, 479, 230, 1, RGBA8(5, 5, 6, 255));
 		vita2d_draw_rectangle(0, 480, 230, 64, RGBA8(40, 43, 48, 255));
 
-		if (sideAvatar != NULL){
-			vita2d_draw_texture(sideAvatar, 14, 493);
-		}
-		else{
-			vita2d_draw_texture(sidepanelStateIconImage, 14, 493);
-		}
+		
 
-		//vita2d_draw_texture(sidepanelStateIconImage, 14, 493); // sidepanelStateIconImage = user icon or Vitacord-default-usericon.png
-		vita2d_font_draw_text(vita2dFont[18], 70, 514, RGBA8(255, 255, 255, 255), 22, panelUsername.c_str());
-		vita2d_font_draw_text(vita2dFont[15], 70, 540, RGBA8(255, 255, 255, 255), 14, panelUserDiscriminator.c_str()); // create a vita2dfont for each font-size or your font will get messed up.
+		vita2d_draw_texture(sidepanelStateIconImage, 14, 493); // sidepanelStateIconImage = user icon or Vitacord-default-usericon.png
+		vita2d_font_draw_text(vita2dFont[24], 70, 514, RGBA8(255, 255, 255, 255), 24, panelUsername.c_str());
+		vita2d_font_draw_text(vita2dFont[14], 70, 530, RGBA8(255, 255, 255, 255), 14, panelUserDiscriminator.c_str()); // create a vita2dfont for each font-size or your font will get messed up.
 		
 		vita2d_draw_texture(dmIconImage, 166, 41); // DM ICON 
 		
@@ -315,6 +318,7 @@ void VitaGUI::Draw(){
 		// maybe add something on the big right 
 		
 		/// STATBAR
+		DrawUserBar();
 		DrawStatusBar();
 		
 	}else if(state == 3){
@@ -338,8 +342,8 @@ void VitaGUI::Draw(){
 		vita2d_draw_rectangle(0, 479, 230, 1, RGBA8(5, 5, 6, 255));
 		vita2d_draw_rectangle(0, 480, 230, 64, RGBA8(40, 43, 48, 255));
 		vita2d_draw_texture(sidepanelStateIconImage, 14, 493); // sidepanelStateIconImage = user icon or Vitacord-default-usericon.png
-		vita2d_font_draw_text(vita2dFont[18], 70, 514, RGBA8(255, 255, 255, 255), 18, panelUsername.c_str());
-		vita2d_font_draw_text(vita2dFont[15], 70, 530, RGBA8(255, 255, 255, 255), 15, panelUserDiscriminator.c_str()); // create a vita2dfont for each font-size or your font will get messed up.
+		vita2d_font_draw_text(vita2dFont[24], 70, 514, RGBA8(255, 255, 255, 255), 24, panelUsername.c_str());
+		vita2d_font_draw_text(vita2dFont[14], 70, 530, RGBA8(255, 255, 255, 255), 14, panelUserDiscriminator.c_str()); // create a vita2dfont for each font-size or your font will get messed up.
 		
 		vita2d_draw_texture(dmIconImage, 166, 41); // DM ICON  
 		
@@ -347,6 +351,7 @@ void VitaGUI::Draw(){
 		// maybe add something on the big right 
 		
 		/// STATBAR
+		DrawUserBar();
 		DrawStatusBar();
 		
 	}else if(state == 4){
@@ -387,8 +392,8 @@ void VitaGUI::Draw(){
 		vita2d_draw_rectangle(0, 479, 230, 1, RGBA8(5, 5, 6, 255));
 		vita2d_draw_rectangle(0, 480, 230, 64, RGBA8(40, 43, 48, 255));
 		vita2d_draw_texture(sidepanelStateIconImage, 14, 493); // sidepanelStateIconImage = user icon or Vitacord-default-usericon.png
-		vita2d_font_draw_text(vita2dFont[18], 70, 514, RGBA8(255, 255, 255, 255), 18, panelUsername.c_str());
-		vita2d_font_draw_text(vita2dFont[15], 70, 530, RGBA8(255, 255, 255, 255), 15, panelUserDiscriminator.c_str()); // create a vita2dfont for each font-size or your font will get messed up.
+		vita2d_font_draw_text(vita2dFont[24], 70, 514, RGBA8(255, 255, 255, 255), 24, panelUsername.c_str());
+		vita2d_font_draw_text(vita2dFont[14], 70, 530, RGBA8(255, 255, 255, 255), 14, panelUserDiscriminator.c_str()); // create a vita2dfont for each font-size or your font will get messed up.
 		
 		vita2d_draw_texture(dmIconImage, 166, 41); // DM ICON 
 		
@@ -398,6 +403,7 @@ void VitaGUI::Draw(){
 		
 		
 		/// STATBAR
+		DrawUserBar();
 		DrawStatusBar();
 		
 		// MESSAGEINPUT
@@ -425,8 +431,8 @@ void VitaGUI::Draw(){
 		vita2d_draw_rectangle(0, 479, 230, 1, RGBA8(5, 5, 6, 255));
 		vita2d_draw_rectangle(0, 480, 230, 64, RGBA8(40, 43, 48, 255));
 		vita2d_draw_texture(sidepanelStateIconImage, 14, 493); // sidepanelStateIconImage = user icon or Vitacord-default-usericon.png
-		vita2d_font_draw_text(vita2dFont[18], 70, 514, RGBA8(255, 255, 255, 255), 18, panelUsername.c_str());
-		vita2d_font_draw_text(vita2dFont[15], 70, 530, RGBA8(255, 255, 255, 255), 15, panelUserDiscriminator.c_str()); // create a vita2dfont for each font-size or your font will get messed up.
+		vita2d_font_draw_text(vita2dFont[24], 70, 514, RGBA8(255, 255, 255, 255), 24, panelUsername.c_str());
+		vita2d_font_draw_text(vita2dFont[14], 70, 530, RGBA8(255, 255, 255, 255), 14, panelUserDiscriminator.c_str()); // create a vita2dfont for each font-size or your font will get messed up.
 		
 		vita2d_draw_rectangle(146, 30, 84, 69, RGBA8(66, 70, 77, 225));
 		vita2d_draw_texture(dmIconImage, 166, 41); // DM ICON 
@@ -435,6 +441,7 @@ void VitaGUI::Draw(){
 		// maybe add something on the big right 
 		
 		/// STATBAR
+		DrawUserBar();
 		DrawStatusBar();
 		
 	}else if(state == 7){
@@ -457,8 +464,8 @@ void VitaGUI::Draw(){
 		vita2d_draw_rectangle(0, 479, 230, 1, RGBA8(5, 5, 6, 255));
 		vita2d_draw_rectangle(0, 480, 230, 64, RGBA8(40, 43, 48, 255));
 		vita2d_draw_texture(sidepanelStateIconImage, 14, 493); // sidepanelStateIconImage = user icon or Vitacord-default-usericon.png
-		vita2d_font_draw_text(vita2dFont[18], 70, 514, RGBA8(255, 255, 255, 255), 18, panelUsername.c_str());
-		vita2d_font_draw_text(vita2dFont[15], 70, 530, RGBA8(255, 255, 255, 255), 15, panelUserDiscriminator.c_str()); // create a vita2dfont for each font-size or your font will get messed up.
+		vita2d_font_draw_text(vita2dFont[24], 70, 514, RGBA8(255, 255, 255, 255), 24, panelUsername.c_str());
+		vita2d_font_draw_text(vita2dFont[14], 70, 530, RGBA8(255, 255, 255, 255), 14, panelUserDiscriminator.c_str()); // create a vita2dfont for each font-size or your font will get messed up.
 		
 		vita2d_draw_rectangle(146, 30, 84, 69, RGBA8(66, 70, 77, 225));
 		vita2d_draw_texture(dmIconImage, 166, 41); // DM ICON 
@@ -467,6 +474,7 @@ void VitaGUI::Draw(){
 		// maybe add something on the big right 
 		
 		/// STATBAR
+		DrawUserBar();
 		DrawStatusBar();
 		
 		
@@ -1176,9 +1184,9 @@ void VitaGUI::DrawLoginScreen(){
 			vita2d_draw_texture( backgroundImageDay, 0, 0);
 		}
 		vita2d_draw_texture( loginFormImage , 161, 53 );
-		vita2d_font_draw_text(vita2dFont[18] , 438, 181, RGBA8(255,255,255,255), 18, loginTexts[0].c_str());
-		vita2d_font_draw_text(vita2dFont[18] , 438, 261, RGBA8(255,255,255,255), 18, loginTexts[1].c_str());
-		vita2d_font_draw_text(vita2dFont[18] , 750, 261, RGBA8(255,0,0,255), 18, loginTexts[2].c_str());
+		vita2d_font_draw_text(vita2dFont[22] , 438, 179, RGBA8(255,255,255,255), 22, loginTexts[0].c_str());
+		vita2d_font_draw_text(vita2dFont[22] , 438, 259, RGBA8(255,255,255,255), 22, loginTexts[1].c_str());
+		vita2d_font_draw_text(vita2dFont[22] , 750, 259, RGBA8(255,0,0,255), 22, loginTexts[2].c_str());
 	
 }
 
@@ -1236,8 +1244,8 @@ void VitaGUI::DrawMessages(){
 				
 			}
 			
-				vita2d_font_draw_text(vita2dFont[26], 300, yPos + 26, RGBA8(255, 255, 255, 255), 22, messageBoxes[i].username.c_str());
-				vita2d_font_draw_text(vita2dFont[32], 300, yPos + 55, RGBA8(255, 255, 255, 255), 22, messageBoxes[i].content.c_str());
+				vita2d_font_draw_text(vita2dFont[22], 300, yPos + 26, RGBA8(255, 255, 255, 255), 22, messageBoxes[i].username.c_str());
+				vita2d_font_draw_text(vita2dFont[22], 300, yPos + 55, RGBA8(255, 255, 255, 255), 22, messageBoxes[i].content.c_str());
 				 
 			if( messageBoxes[i].showAttachmentAsImage ){
 				vita2d_draw_rectangle( 240 , yPos + height - ATTACHMENT_HEIGHT - 16 , ATTACHMENT_HEIGHT , ATTACHMENT_HEIGHT , RGBA8(0x9F , 0x9F , 0x9F , 0xFF) );
@@ -1347,9 +1355,9 @@ void VitaGUI::DrawDirectMessageMessages(){
 				
 			}
 			
-				vita2d_font_draw_text(vita2dFont[15], 300, yPos + 26, RGBA8(255, 255, 255, 255), 22, directMessageMessagesBoxes[i].username.c_str());
+				vita2d_font_draw_text(vita2dFont[22], 300, yPos + 26, RGBA8(255, 255, 255, 255), 22, directMessageMessagesBoxes[i].username.c_str());
 
-				vita2d_font_draw_text(vita2dFont[15], 300, yPos + 55, RGBA8(255, 255, 255, 255), 22, directMessageMessagesBoxes[i].content.c_str());
+				vita2d_font_draw_text(vita2dFont[22], 300, yPos + 55, RGBA8(255, 255, 255, 255), 22, directMessageMessagesBoxes[i].content.c_str());
 
 			
 			// draw default icon.

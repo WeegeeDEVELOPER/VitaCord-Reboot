@@ -100,6 +100,8 @@ class VitaGUI{
 		VitaIME * vitaIMEPtr;
 		
 		void DrawStatusBar();
+		void DrawUserBar();
+		void DrawServerStats();
 		
 		Discord *discordPtr;
 		int currentFont = 0;
@@ -117,7 +119,7 @@ class VitaGUI{
 		vita2d_texture *backgroundImage;
 		vita2d_texture *backgroundImageDay;
 
-		vita2d_texture *sideAvatar;
+		//vita2d_texture *sideAvatar;
 		
 		vita2d_texture *loginFormImage;
 		vita2d_texture *loadingImage;
