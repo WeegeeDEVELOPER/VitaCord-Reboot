@@ -62,7 +62,7 @@ class Discord{
 			std::string mentions;
 			std::string timestamp;
 			std::string id;
-			std::string avatar;
+			//std::string avatar;
 			std::vector<message_emoji> emojis;
 		}message;
 		typedef struct{
@@ -95,6 +95,7 @@ class Discord{
 			std::string name;
 			std::vector<channel> channels;
 			std::vector<std::string> myroles;
+			std::vector<int> rolecolors; //hex, must be converted to rgb code
 		}guild;
 		typedef struct {
 			std::string last_message_id;

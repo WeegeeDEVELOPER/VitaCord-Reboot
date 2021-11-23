@@ -843,8 +843,9 @@ void * Discord::thread_loadData(void *arg){
 								for(int rol = 0; rol < rolesAmount ; rol++){
 									if(!j_complete["roles"][rol].is_null()){
 										std::string role = j_complete["roles"][rol].get<std::string>();
+										int rolecolor = j_complete["roles"]["color"][rol].get<int>();
 										discordPtr->guilds[i].myroles.push_back(role);
-
+										discordPtr->guilds[i].rolecolors.push_back(rolecolor);
 									}
 
 								}

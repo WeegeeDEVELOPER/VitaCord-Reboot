@@ -1220,6 +1220,21 @@ void VitaGUI::DrawChannelsOnSidebar(){
 	
 }
 
+typedef struct RGB {
+    double r;
+    double g;
+    double b;
+} RGB1;
+
+struct RGB colorConverter(int hexValue){
+  struct RGB rgbColor;
+  rgbColor.r = ((hexValue >> 16) & 0xFF) / 255.0;  // Extract the RR byte
+  rgbColor.g = ((hexValue >> 8) & 0xFF) / 255.0;   // Extract the GG byte
+  rgbColor.b = ((hexValue) & 0xFF) / 255.0;        // Extract the BB byte
+
+  return rgbColor; 
+}
+
 void VitaGUI::DrawMessages(){
 	
 	int yPos = messageScrollY + 40 , height;
@@ -1243,8 +1258,14 @@ void VitaGUI::DrawMessages(){
 				vita2d_draw_rectangle(242, yPos + height + 1, 706, 1, RGBA8(62, 65, 70, 255)); 
 				
 			}
-			
-				vita2d_font_draw_text(vita2dFont[22], 300, yPos + 26, RGBA8(255, 255, 255, 255), 22, messageBoxes[i].username.c_str());
+				
+				for (int i = 0; i < discordPtr->guilds.rolecolors; i++){
+					RGB color = colorConverter(discordPtr->guilds.rolecolors[i]);
+					int rVal = color.r;
+					int gVal = color.g;
+					int bVal = color.b;
+					vita2d_font_draw_text(vita2dFont[22], 300, yPos + 26, RGBA8(rVal, gVal, bVal, 255), 22, messageBoxes[i].username.c_str());
+				}
 				vita2d_font_draw_text(vita2dFont[22], 300, yPos + 55, RGBA8(255, 255, 255, 255), 22, messageBoxes[i].content.c_str());
 				 
 			if( messageBoxes[i].showAttachmentAsImage ){
@@ -1298,7 +1319,7 @@ void VitaGUI::DrawMessages(){
 			}
 			*/
 
-
+			/*
 			VitaNet::curlDiscordGetAvatars(("https://discordapp.com/avatars/" + messageBoxes[i].id + "/" + messageBoxes[i].avatar + ".png"), (discordPtr->token), ("ux0:data/vitacord/cache/avatars/users/"));
 			std::string avatarLocation = "ux0:data/vitacord/cache/avatars/users/" + messageBoxes[i].avatar + ".png";
 			vita2d_texture *_newAvatar = vita2d_load_PNG_file(avatarLocation.c_str());
@@ -1309,6 +1330,9 @@ void VitaGUI::DrawMessages(){
 			else{
 				vita2d_draw_texture(userIconDefaultImage, 243, yPos + 6);
 			}
+			*/
+
+			vita2d_draw_texture(userIconDefaultImage, 243, yPos + 6);
 			
 		}
 
