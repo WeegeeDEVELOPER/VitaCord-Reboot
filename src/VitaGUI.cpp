@@ -1198,7 +1198,10 @@ void VitaGUI::DrawGuildsOnSidebar(){
 			vita2d_font_draw_text(vita2dFont[GUILD_TITLE_TEXT_SIZE_PIXEL] , guildScrollX + 58, 100 + guildScrollY + i * GUILD_HEIGHT + 40, RGBA8(255,255,255,255), GUILD_TITLE_TEXT_SIZE_PIXEL, guildBoxes[i].name.c_str());
 		}
 		if (guildIconDefaultImage != NULL){
-			vita2d_draw_texture(guildIconDefaultImage, 8, 4 + guildScrollY + i * GUILD_HEIGHT + 40);
+			if (discordPtr->serverIcons[i] != NULL){
+				vita2d_draw_texture(discordPtr->serverIcons[i], 6, 68 + guildScrollY + i * GUILD_HEIGHT + 40);
+			}
+			vita2d_draw_texture(guildIconDefaultImage, 6, 68 + guildScrollY + i * GUILD_HEIGHT + 40);
 		}
 	}
 }
@@ -1214,7 +1217,7 @@ void VitaGUI::DrawChannelsOnSidebar(){
 			vita2d_font_draw_text(vita2dFont[CHANNEL_TITLE_TEXT_SIZE_PIXEL] , channelScrollX + 38, 100 + channelScrollY + i * CHANNEL_HEIGHT + 42  , RGBA8(255,255,255,255), CHANNEL_TITLE_TEXT_SIZE_PIXEL, channelBoxes[i].name.c_str());
 		}
 		if (channelIconDefaultImage != NULL){
-			vita2d_draw_texture(channelIconDefaultImage, 8, 16 + channelScrollY + i * CHANNEL_HEIGHT + 42);
+			vita2d_draw_texture(channelIconDefaultImage, 6, 78 + channelScrollY + i * CHANNEL_HEIGHT + 42);
 		}
 	}
 	
@@ -1258,15 +1261,11 @@ void VitaGUI::DrawMessages(){
 				vita2d_draw_rectangle(242, yPos + height + 1, 706, 1, RGBA8(62, 65, 70, 255)); 
 				
 			}
-				
-				for (int i = 0; i < discordPtr->guilds.rolecolors; i++){
-					RGB color = colorConverter(discordPtr->guilds.rolecolors[i]);
-					int rVal = color.r;
-					int gVal = color.g;
-					int bVal = color.b;
-					vita2d_font_draw_text(vita2dFont[22], 300, yPos + 26, RGBA8(rVal, gVal, bVal, 255), 22, messageBoxes[i].username.c_str());
-				}
-				vita2d_font_draw_text(vita2dFont[22], 300, yPos + 55, RGBA8(255, 255, 255, 255), 22, messageBoxes[i].content.c_str());
+				int rVal = 255;
+				int gVal = 255;
+				int bVal = 255;
+				vita2d_font_draw_text(vita2dFont[22], 300, yPos + 26, RGBA8(rVal, gVal, bVal, 255), 22, messageBoxes[i].username.c_str());
+				vita2d_font_draw_text(vita2dFont[22], 300, yPos + 55, RGBA8(153, 170, 181, 255), 22, messageBoxes[i].content.c_str());
 				 
 			if( messageBoxes[i].showAttachmentAsImage ){
 				vita2d_draw_rectangle( 240 , yPos + height - ATTACHMENT_HEIGHT - 16 , ATTACHMENT_HEIGHT , ATTACHMENT_HEIGHT , RGBA8(0x9F , 0x9F , 0x9F , 0xFF) );
@@ -1274,6 +1273,7 @@ void VitaGUI::DrawMessages(){
 					if ( discordPtr->guilds[discordPtr->currentGuild].channels[discordPtr->currentChannel].messages[i].attachment.loadedThumbImage == true ){
 						if ( discordPtr->guilds[discordPtr->currentGuild].channels[discordPtr->currentChannel].messages[i].attachment.isEmpty == false ){
 							if ( discordPtr->guilds[discordPtr->currentGuild].channels[discordPtr->currentChannel].messages[i].attachment.thumbnail != NULL ){
+
 								vita2d_draw_texture( discordPtr->guilds[discordPtr->currentGuild].channels[discordPtr->currentChannel].messages[i].attachment.thumbnail , 240 , yPos + height - ATTACHMENT_HEIGHT - 16);
 							}
 						}

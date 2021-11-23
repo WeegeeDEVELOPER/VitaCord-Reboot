@@ -768,47 +768,56 @@ void * Discord::thread_loadData(void *arg){
 
 							if(!j_complete[i].is_null()){
 
-
+								criticalLogSD("\nnew server information;");
 								if(!j_complete[i]["owner"].is_null()){
 									discordPtr->guilds[i].owner = j_complete[i]["owner"].get<bool>();
+									criticalLogSD("owner: " + std::to_string(discordPtr->guilds[i].owner));
 								}else{
 									discordPtr->guilds[i].owner = false;
+									criticalLogSD("owner: " + std::to_string(discordPtr->guilds[i].owner));
 								}
 
 								if(!j_complete[i]["permissions"].is_null()){
 									discordPtr->guilds[i].permissions = j_complete[i]["permissions"].get<long>();
+									criticalLogSD("perms: " + std::to_string(discordPtr->guilds[i].permissions));
 								}else{
 									discordPtr->guilds[i].permissions = 0;
+									criticalLogSD("perms: " + std::to_string(discordPtr->guilds[i].permissions));
 								}
 
 								if(!j_complete[i]["icon"].is_null()){
 									discordPtr->guilds[i].icon = j_complete[i]["icon"].get<std::string>();
+									criticalLogSD("icon: " + discordPtr->guilds[i].icon);
 								}else{
 									discordPtr->guilds[i].icon = "";
+									criticalLogSD("icon: " + discordPtr->guilds[i].icon);
 								}
 
 								if(!j_complete[i]["id"].is_null()){
 									discordPtr->guilds[i].id = j_complete[i]["id"].get<std::string>();
-									logSD(discordPtr->guilds[i].id);
+									criticalLogSD("id: " + discordPtr->guilds[i].id);
 								}else{
 									discordPtr->guilds[i].id = "";
-									logSD(discordPtr->guilds[i].id);
+									criticalLogSD("id: " + discordPtr->guilds[i].id);
 								}
 
 								if(!j_complete[i]["name"].is_null()){
 									discordPtr->guilds[i].name = j_complete[i]["name"].get<std::string>();
-									logSD(discordPtr->guilds[i].name);
+									criticalLogSD("name: " + discordPtr->guilds[i].name);
 
 								}else{
 									discordPtr->guilds[i].name = "";
-									logSD(discordPtr->guilds[i].name);
+									criticalLogSD("name: " + discordPtr->guilds[i].name);
 								}
-
-
+								
+								criticalLogSD("downloading icons to cache...");
+								VitaNet::http_response downloadIconResponse = discordPtr->vitaNet.curlDiscordDownloadImage("https://cdn.discordapp.com/icons/" + discordPtr->guilds[i].id + "/" + discordPtr->guilds[i].icon + ".png?size=48", discordPtr->token, "ux0:data/vitacord/cache/avatars/servers/" + discordPtr->guilds[i].icon + ".png");
+								std::string path = "ux0:data/vitacord/cache/avatars/servers/" + discordPtr->guilds[i].icon + ".png";
+								discordPtr->timelyIcon = vita2d_load_PNG_file(path.c_str());
+								discordPtr->serverIcons.push_back(discordPtr->timelyIcon);
+								criticalLogSD("DONE!");
 
 							}
-
-
 						}
 						discordPtr->loadedGuilds = true;
 					}
@@ -820,10 +829,6 @@ void * Discord::thread_loadData(void *arg){
 				discordPtr->loadedGuilds = true;
 			}
 		}else if(discordPtr->loadedGuilds && !discordPtr->loadedChannels){
-
-
-
-
 
 			for(int i = 0; i < discordPtr->guildsAmount ; i++){
 
@@ -844,19 +849,19 @@ void * Discord::thread_loadData(void *arg){
 									if(!j_complete["roles"][rol].is_null()){
 										std::string role = j_complete["roles"][rol].get<std::string>();
 										int rolecolor = j_complete["roles"]["color"][rol].get<int>();
+										
+										criticalLogSD(role);
+										criticalLogSD(rolecolor + ": " + i);
+
 										discordPtr->guilds[i].myroles.push_back(role);
 										discordPtr->guilds[i].rolecolors.push_back(rolecolor);
 									}
-
 								}
-
 							}
-
 						}
 					}catch(const std::exception& e){
 						// nothing
 					}
-
 				}
 
 
@@ -1387,26 +1392,34 @@ long Discord::fetchUserData(){
 		// check if Two-Factor-Authentication is activated and needs further user action
 		nlohmann::json j_complete = nlohmann::json::parse(userdataresponse.body);
 		if(!j_complete.is_null()){
+			criticalLogSD("\nuser information;");
 			if(!j_complete["username"].is_null()){
 				username = j_complete["username"].get<std::string>();
+				criticalLogSD("username: " + username);
 			}
 			if(!j_complete["verified"].is_null()){
 				verified = j_complete["verified"].get<bool>();
+				criticalLogSD("verified: " + std::to_string(verified));
 			}
 			if(!j_complete["mfa_enabled"].is_null()){
 				mfa_enabled = j_complete["mfa_enabled"].get<bool>();
+				criticalLogSD("mfa enabled: " + std::to_string(mfa_enabled));
 			}
 			if(!j_complete["id"].is_null()){
 				id = j_complete["id"].get<std::string>();
+				criticalLogSD("id: " + id);
 			}
 			if(!j_complete["phone"].is_null()){
 				phone = j_complete["phone"].get<std::string>();
+				criticalLogSD("phone: " + phone);
 			}
 			if(!j_complete["avatar"].is_null()){
 				avatar = j_complete["avatar"].get<std::string>();
+				criticalLogSD("avatar: " + avatar);
 			}
 			if(!j_complete["discriminator"].is_null()){
 				discriminator = j_complete["discriminator"].get<std::string>();
+				criticalLogSD("discriminator: " + discriminator);
 			}
 		}
 

@@ -70,7 +70,6 @@ class VitaGUI{
 		
 		void SetStateToLastState();
 		
-		
 		void DrawLoginScreen();
 		void DrawGuildsOnSidebar();
 		void DrawChannelsOnSidebar();
@@ -134,6 +133,7 @@ class VitaGUI{
 		vita2d_texture *sidepanelStateIconImage;
 		vita2d_texture *messageInputImage;
 		vita2d_texture *defaultBinaryThumbnail;
+
 		std::vector<rectangle> rectangles;
 		std::string loadingScreenString;
 		//std::vector<std::string> guildNames;

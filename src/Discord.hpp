@@ -18,6 +18,7 @@
 
 class Discord{
 	public:
+		VitaNet vitaNet;
 		typedef struct {
 			std::string username;
 			std::string discriminator;
@@ -179,8 +180,10 @@ class Discord{
 		std::unordered_map<int, emoji>::iterator emojiMapIterator;
 		int emojiCount;
 		std::vector<int> emojiTestArray;
+
+		vita2d_texture *timelyIcon;
+		std::vector<vita2d_texture*> serverIcons;
 	private:
-		VitaNet vitaNet;
 		bool verified, mfa_enabled; // mfa == twofactor its the same
 		bool twoFactorAuthEnabled;
 		bool loggedin;
@@ -193,6 +196,7 @@ class Discord{
 		void getDirectMessageChannels();
 		void getChannelMessages(int channelIndex);
 		void getCurrentDirectMessages();
+		void downloadGuildIcons();
 		void *thread_loadData(void *arg);
 		void *thread_refreshMessages(void *arg);
 		

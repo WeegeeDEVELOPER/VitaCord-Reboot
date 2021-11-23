@@ -299,7 +299,7 @@ static size_t write_data_to_disk(void *ptr, size_t size, size_t nmemb, void *str
 }
 
 
-VitaNet::http_response  VitaNet::curlDiscordDownloadImage(std::string url , std::string authtoken , std::string file){
+VitaNet::http_response VitaNet::curlDiscordDownloadImage(std::string url , std::string authtoken , std::string file){
 	// file will be like "ux0:data/folder/imagename.jpg";
 	VitaNet::http_response resp;
 	std::string authorizationHeader = "Authorization: " + authtoken;
@@ -368,7 +368,7 @@ VitaNet::http_response  VitaNet::curlDiscordDownloadImage(std::string url , std:
 	return resp;
 }
 
-
+/*
 static void VitaNet::curlDiscordGetAvatars(std::string url, std::string authtoken, std::string dest){
 	VitaNet::http_response resp;
 	std::string authorizationHeader = "Authorization: " + authtoken;
@@ -396,7 +396,7 @@ static void VitaNet::curlDiscordGetAvatars(std::string url, std::string authtoke
 		curl_easy_setopt(curl, CURLOPT_HEADERFUNCTION, writefunc);
 		curl_easy_setopt(curl, CURLOPT_HEADERDATA, &header);
 		struct curl_slist *headerchunk = NULL;
-		headerchunk = curl_slist_append(headerchunk, "Accept: */*");
+		headerchunk = curl_slist_append(headerchunk, "Accept: *");
 		headerchunk = curl_slist_append(headerchunk, "Content-Type: application/json");
 		headerchunk = curl_slist_append(headerchunk, "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36");
 		headerchunk = curl_slist_append(headerchunk, authorizationHeader.c_str());
@@ -421,6 +421,7 @@ static void VitaNet::curlDiscordGetAvatars(std::string url, std::string authtoke
 	sceIoClose(file);
 	curl_easy_cleanup(curl);
 }
+*/
 
 
 
