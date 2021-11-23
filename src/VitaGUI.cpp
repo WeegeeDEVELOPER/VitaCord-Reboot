@@ -1177,7 +1177,7 @@ void VitaGUI::DrawLoginScreen(){
 
 		SceDateTime time;
 		sceRtcGetCurrentClockLocalTime(&time);
-		if (time.hour >= 18){
+		if (time.hour >= 18 && time.hour <= 7){
 			vita2d_draw_texture( backgroundImage, 0, 0);
 		}
 		else{

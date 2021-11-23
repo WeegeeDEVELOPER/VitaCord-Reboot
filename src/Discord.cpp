@@ -429,7 +429,7 @@ void Discord::getChannelMessages(int channelIndex){
 
 					newMessage.attachment.isEmpty = true;
 					
-					bool attachmentDownloadEnabled = false;
+					bool attachmentDownloadEnabled = true;
 					
 					if(!j_complete[iR]["attachments"].is_null() && attachmentDownloadEnabled){
 						if(!j_complete[iR]["attachments"][0].is_null()){
