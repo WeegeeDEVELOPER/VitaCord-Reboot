@@ -4,4 +4,6 @@ VitaCord given new life, currently WIP.
 For now it is not recommended to compile from source, mainly because the source is not working properly all the time, if you want a build its best to take a look at the releases... https://github.com/WeegeeDEVELOPER/VitaCord-Reboot/releases
 
 # Important, use an alternate account!
-While I can not be 100% certain of you getting banned, there always is a small chance, if you feel like trying any pre-release, please use an alternate account!
+Currently the client is using a system which "spams" the API with requests, this is seen as API abuse and (if spotted) will result in your account getting suspended, while there is no clear evidence of this happening yet, its better to be safe than sorry, so please use an alternate account until the client is updated to use a different approach. 
+
+**This will most likely be fixed in a future release!**
