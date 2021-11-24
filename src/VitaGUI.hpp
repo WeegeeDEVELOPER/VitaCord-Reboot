@@ -69,6 +69,7 @@ class VitaGUI{
 		void updateBoxes();
 		
 		void SetStateToLastState();
+		void DrawSideAvatar();
 		
 		void DrawLoginScreen();
 		void DrawGuildsOnSidebar();
@@ -126,6 +127,7 @@ class VitaGUI{
 		vita2d_texture *dmIconImage;
 		vita2d_texture *userIconDefaultImage;
 		vita2d_texture *guildIconDefaultImage;
+		vita2d_texture *guildIconDefaultImageSmall;
 		vita2d_texture *channelIconDefaultImage;
 		vita2d_texture *statbarIconImage;
 		vita2d_texture *statbarBatteryImage;

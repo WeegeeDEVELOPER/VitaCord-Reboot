@@ -183,6 +183,14 @@ class Discord{
 
 		vita2d_texture *timelyIcon;
 		std::vector<vita2d_texture*> serverIcons;
+
+		vita2d_texture *timelyDmIcon;
+		std::vector<vita2d_texture*> dmIcons;
+
+		vita2d_texture *timelyMessageIcon;
+		std::vector<vita2d_texture*> messageIcons;
+
+		vita2d_texture *userIcon;
 	private:
 		bool verified, mfa_enabled; // mfa == twofactor its the same
 		bool twoFactorAuthEnabled;

@@ -810,9 +810,12 @@ void * Discord::thread_loadData(void *arg){
 									criticalLogSD("name: " + discordPtr->guilds[i].name);
 								}
 								
-								criticalLogSD("downloading icons to cache...");
-								VitaNet::http_response downloadIconResponse = discordPtr->vitaNet.curlDiscordDownloadImage("https://cdn.discordapp.com/icons/" + discordPtr->guilds[i].id + "/" + discordPtr->guilds[i].icon + ".png?size=48", discordPtr->token, "ux0:data/vitacord/cache/avatars/servers/" + discordPtr->guilds[i].icon + ".png");
+								criticalLogSD("downloading icon to cache...");
+								std::string webPath = "https://cdn.discordapp.com/icons/" + discordPtr->guilds[i].id + "/" + discordPtr->guilds[i].icon + ".png?size=48";
+								VitaNet::http_response downloadIconResponse = discordPtr->vitaNet.curlDiscordDownloadImage(webPath, discordPtr->token, "ux0:data/vitacord/cache/avatars/servers/" + discordPtr->guilds[i].icon + ".png");
+								criticalLogSD("Downloading from: " + webPath);
 								std::string path = "ux0:data/vitacord/cache/avatars/servers/" + discordPtr->guilds[i].icon + ".png";
+								criticalLogSD("Downloading to: " + path);
 								discordPtr->timelyIcon = vita2d_load_PNG_file(path.c_str());
 								discordPtr->serverIcons.push_back(discordPtr->timelyIcon);
 								criticalLogSD("DONE!");
@@ -1135,6 +1138,16 @@ void * Discord::thread_loadData(void *arg){
 										logSD("avatar : " + discordPtr->directMessages[i].recipients[r].avatar);
 									}
 
+									criticalLogSD("downloading DM icons to cache...");
+									std::string webPath = "https://cdn.discordapp.com/avatars/" + directMessages[i].recipients[r].id + "/" + directMessages[i].recipients[r].avatar + ".png?size=48";
+									VitaNet::http_response downloadIconResponse = vitaNet.curlDiscordDownloadImage(webPath, token, "ux0:data/vitacord/cache/avatars/users/" + directMessages[i].recipients[r].avatar + ".png");
+									criticalLogSD("downloading from: " + webPath);
+									std::string path = "ux0:data/vitacord/cache/avatars/users/" + directMessages[i].recipients[r].avatar + ".png";
+									criticalLogSD("downloading to: " + path);
+									timelyDmIcon = vita2d_load_PNG_file(path.c_str());
+									dmIcons.push_back(timelyDmIcon);
+									criticalLogSD("DONE!");
+
 
 									logSD("end of adding recipient.");
 								}
@@ -1254,14 +1267,20 @@ void Discord::getDirectMessageChannels(){
 							}else{
 								directMessages[i].recipients[r].avatar = "";
 							}
-
-
+							
+							/*
+							criticalLogSD("downloading DM icons to cache...");
+							std::string webPath = "https://cdn.discordapp.com/avatars/" + directMessages[i].recipients[r].id + "/" + directMessages[i].recipients[r].avatar + ".png?size=48";
+							VitaNet::http_response downloadIconResponse = vitaNet.curlDiscordDownloadImage(webPath, token, "ux0:data/vitacord/cache/avatars/users/" + directMessages[i].recipients[r].avatar + ".png");
+							criticalLogSD("downloading from: " + webPath);
+							std::string path = "ux0:data/vitacord/cache/avatars/users/" + directMessages[i].recipients[r].avatar + ".png";
+							criticalLogSD("downloading to: " + path);
+							timelyDmIcon = vita2d_load_PNG_file(path.c_str());
+							dmIcons.push_back(timelyDmIcon);
+							criticalLogSD("DONE!");
+							*/
 						}
 					}
-
-
-
-
 				}
 
 			}
@@ -1421,6 +1440,16 @@ long Discord::fetchUserData(){
 				discriminator = j_complete["discriminator"].get<std::string>();
 				criticalLogSD("discriminator: " + discriminator);
 			}
+
+			criticalLogSD("downloading user icon to cache...");
+			std::string webPath = "https://cdn.discordapp.com/avatars/" + id + "/" + avatar + ".png?size=48";
+			VitaNet::http_response downloadIconResponse = vitaNet.curlDiscordDownloadImage(webPath, token, "ux0:data/vitacord/cache/avatars/users/" + avatar + ".png");
+			criticalLogSD("Downloading from: " + webPath);
+			std::string path = "ux0:data/vitacord/cache/avatars/users/" + avatar + ".png";
+			criticalLogSD("Downloading to: " + path);
+			userIcon = vita2d_load_PNG_file(path.c_str());
+			criticalLogSD("DONE!");
+
 		}
 
 
