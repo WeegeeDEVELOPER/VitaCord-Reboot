@@ -1,6 +1,5 @@
 # Discord on the Vita
 A continuation of VitaCord with new features and a facelift. Currently a WIP.
-![Github Banner](Github-Banner.png)
 
 ## Installation
 Download the latest `VitaCord_Reboot.vpk` from [here](https://github.com/WeegeeDEVELOPER/VitaCord-Reboot/releases).
