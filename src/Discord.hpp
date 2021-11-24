@@ -9,6 +9,8 @@
 #include <pthread.h>
 #include <vita2d.h>
 #include <unordered_map>
+#include <fstream>
+#include <iostream>
 
 #include "VitaNet.hpp"
 #include "json.hpp"
@@ -189,6 +191,9 @@ class Discord{
 
 		vita2d_texture *timelyMessageIcon;
 		std::vector<vita2d_texture*> messageIcons;
+
+		vita2d_texture *timelyDmMessageIcon;
+		std::vector<vita2d_texture*> dmMessageIcons;
 
 		vita2d_texture *userIcon;
 	private:

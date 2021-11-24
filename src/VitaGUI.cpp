@@ -54,6 +54,7 @@ VitaGUI::VitaGUI(){
 	userIconDefaultImage = vita2d_load_PNG_file("app0:assets/images/Vitacord-USERIcondefault-8BIT.png");
 	guildIconDefaultImage = vita2d_load_PNG_file("app0:assets/images/Vitacord-GUILDIcondefault-8BIT.png");
 	guildIconDefaultImageSmall = vita2d_load_PNG_file("app0:assets/images/Vitacord-GUILDIcondefault-8BIT-41x41.png");
+	guildIconDefaultImageSmallCopy = vita2d_load_PNG_file("app0:assets/images/Vitacord-GUILDIcondefault-8BIT-41x41-copy.png");
 	channelIconDefaultImage = vita2d_load_PNG_file("app0:assets/images/Vitacord-CHANNELIcondefault-8BIT.png");
 	statbarIconImage = vita2d_load_PNG_file("app0:assets/images/Vitacord-statbar-icon.png");
 	statbarBatteryImage = vita2d_load_PNG_file("app0:assets/images/Vitacord-statbar-battery.png");
@@ -1215,6 +1216,9 @@ void VitaGUI::DrawGuildsOnSidebar(){
 			if (discordPtr->serverIcons[i] != NULL){
 				vita2d_draw_texture(discordPtr->serverIcons[i], 6, 68 + guildScrollY + i * GUILD_HEIGHT + 40);
 			}
+			else{
+				vita2d_draw_texture(userIconDefaultImage, 6, 68 + guildScrollY + i * GUILD_HEIGHT + 40);
+			}
 			vita2d_draw_texture(guildIconDefaultImage, 6, 68 + guildScrollY + i * GUILD_HEIGHT + 40);
 		}
 	}
@@ -1346,11 +1350,18 @@ void VitaGUI::DrawMessages(){
 			}
 			*/
 
-			vita2d_draw_texture(userIconDefaultImage, 243, yPos + 6);
-			
+
+			if (userIconDefaultImage != NULL){
+				if (discordPtr->messageIcons[i] != NULL){
+					vita2d_draw_texture(discordPtr->messageIcons[i], 243, yPos + 6);
+				}
+				else{
+					vita2d_draw_texture(userIconDefaultImage, 243, yPos + 6);
+				}
+				vita2d_draw_texture(guildIconDefaultImageSmallCopy, 243, yPos+ 6);
+			}
 		}
 
-		
 		yPos += height; // add message height to yPos
 		
 	}
@@ -1419,7 +1430,18 @@ void VitaGUI::DrawDirectMessageMessages(){
 			// When user icons is implemented, add vita2d_texture pointer to user data.
 			// Then apply either the default icon pointer or loaded user icon pionter to this vita2d_texture pointer.
 			// For now we'll just draw the default icon for all users.
-			vita2d_draw_texture(userIconDefaultImage, 243, yPos + 6);
+
+			if (userIconDefaultImage != NULL){
+				if (discordPtr->dmMessageIcons[i] != NULL){
+					vita2d_draw_texture(discordPtr->dmMessageIcons[i], 243, yPos + 6);
+				}
+				else{
+					vita2d_draw_texture(userIconDefaultImage, 243, yPos + 6);
+				}
+				vita2d_draw_texture(guildIconDefaultImageSmallCopy, 243, yPos+ 6);
+			}
+
+			//vita2d_draw_texture(userIconDefaultImage, 243, yPos + 6);
 		}
 
 		
