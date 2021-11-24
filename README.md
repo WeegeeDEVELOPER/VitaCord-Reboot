@@ -12,7 +12,7 @@ There is currently no clear evidence of accounts being suspended yet, however it
 **This will most likely be fixed in a future release!**
 
 ## Build
-It is not currently recommended to compile from source. This is due to the source not working properly all the time. If you wish to build it then its best just to take a look at the releases...
+It is not currently recommended to compile from source. This is due to the source not working properly all the time. If you would like to take a look at a build, take a look at the releases.
 
 ## Credits
 Built on top of the original VitaCord by DevingDev. [OG VitaCord Repository](https://github.com/devingDev/VitaCord)
