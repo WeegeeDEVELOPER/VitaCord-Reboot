@@ -2,7 +2,7 @@
 A continuation of VitaCord with new features and a facelift. Currently a WIP.
 
 ## Installation
-Download the latest VitaCord_Reboot.vpk from here. Install the .vpk using VitaShell on your Vita.
+Download the latest ``VitaCord_Reboot.vpk`` from [here(https://github.com/WeegeeDEVELOPER/VitaCord-Reboot/releases)] . Install the .vpk using [VitaShell(https://github.com/TheOfficialFloW/VitaShell/releases/)] on your Vita.
 
 ## Important, uUse an alternate account!
 Currently the client is using a system which "spams" the API with requests,. tThis is seen as API abuse and (if spotted) will result in your account gettingbeing suspended. It is important to note however, that the vVita client has some counter measures against this.
