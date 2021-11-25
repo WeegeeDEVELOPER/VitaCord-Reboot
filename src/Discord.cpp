@@ -226,7 +226,6 @@ bool Discord::refreshMessages(){
 
 		refreshingMessages = true;
 		currentlyRefreshingMessages = true;
-		messageIcons.clear();
 		getChannelMessages(currentChannel);
 		currentlyRefreshingMessages = false;
 		lastFetchTimeMS = osGetTimeMS();
@@ -357,8 +356,6 @@ void Discord::getChannelMessages(int channelIndex){
 	VitaNet::http_response channelmessagesresponse = vitaNet.curlDiscordGet(channelMessagesUrl , token);
 	logSD(channelmessagesresponse.body);
 
-	messageIcons.clear();
-
 	if(channelmessagesresponse.httpcode == 200){
 		nlohmann::json j_complete = nlohmann::json::parse(channelmessagesresponse.body);
 		int messagesAmount = j_complete.size();
@@ -430,24 +427,6 @@ void Discord::getChannelMessages(int channelIndex){
 						newMessage.author.avatar = "0";
 						newMessageBox.avatar = "0";
 					}
-
-					criticalLogSD("\ndownloading avatars to cache...");
-					std::ifstream file;
-					file.open("ux0:data/vitacord/cache/avatars/users/" + newMessage.author.avatar + ".png");
-					if (file){
-						criticalLogSD("the file: " + newMessage.author.avatar + ".png already exists, skipping...");
-					}
-					else{
-						std::string webPath = "https://cdn.discordapp.com/avatars/" + newMessage.author.id + "/" + newMessage.author.avatar + ".png?size=48";
-						VitaNet::http_response downloadIconResponse = vitaNet.curlDiscordDownloadImage(webPath, token, "ux0:data/vitacord/cache/avatars/users/" + newMessage.author.avatar + ".png");
-						criticalLogSD("Downloading from: " + webPath);
-					}
-					std::string path = "ux0:data/vitacord/cache/avatars/users/" + newMessage.author.avatar + ".png";
-					criticalLogSD("loading from: " + path);
-					timelyMessageIcon = vita2d_load_PNG_file(path.c_str());
-					messageIcons.push_back(timelyMessageIcon);
-					criticalLogSD("DONE!");
-
 
 					newMessage.attachment.isEmpty = true;
 					
@@ -706,6 +685,25 @@ void Discord::getChannelMessages(int channelIndex){
 						}
 					}
 
+					//if (!j_complete[iR]["author"]["id"].is_null() && !j_complete[iR]["author"]["avatar"].is_null()){
+						criticalLogSD("\ndownloading avatars to cache...");
+						std::ifstream file;
+						file.open("ux0:data/vitacord/cache/avatars/users/" + newMessage.author.avatar + ".png");
+						if (file){
+							criticalLogSD("the file: " + newMessage.author.avatar + ".png already exists, skipping...");
+						}
+						else{
+							std::string webPath = "https://cdn.discordapp.com/avatars/" + newMessage.author.id + "/" + newMessage.author.avatar + ".png?size=48";
+							VitaNet::http_response downloadIconResponse = vitaNet.curlDiscordDownloadImage(webPath, token, "ux0:data/vitacord/cache/avatars/users/" + newMessage.author.avatar + ".png");
+							criticalLogSD("Downloading from: " + webPath);
+						}
+						std::string path = "ux0:data/vitacord/cache/avatars/users/" + newMessage.author.avatar + ".png";
+						criticalLogSD("loading from: " + path);
+						timelyMessageIcon = vita2d_load_PNG_file(path.c_str());
+						messageIcons.push_back(timelyMessageIcon);
+						criticalLogSD("DONE!");
+					//}
+
 
 
 				}
@@ -766,6 +764,8 @@ void Discord::JoinChannel(int cIndex){
 void Discord::LeaveChannel(){
 	inChannel = false;
 	currentChannel = 0;
+
+	messageIcons.clear();
 }
 void Discord::setToken(std::string tok){
 	token = tok;
@@ -836,22 +836,24 @@ void * Discord::thread_loadData(void *arg){
 									criticalLogSD("name: " + discordPtr->guilds[i].name);
 								}
 								
-								criticalLogSD("downloading icon to cache...");
-								std::ifstream file;
-								file.open("ux0:data/vitacord/cache/avatars/servers/" + discordPtr->guilds[i].icon + ".png");
-								if (file){
-									criticalLogSD("the file: " + discordPtr->guilds[i].icon + ".png already exists, skipping...");
-								}
-								else{
-									std::string webPath = "https://cdn.discordapp.com/icons/" + discordPtr->guilds[i].id + "/" + discordPtr->guilds[i].icon + ".png?size=48";
-									VitaNet::http_response downloadIconResponse = discordPtr->vitaNet.curlDiscordDownloadImage(webPath, discordPtr->token, "ux0:data/vitacord/cache/avatars/servers/" + discordPtr->guilds[i].icon + ".png");
-									criticalLogSD("Downloading from: " + webPath);
-								}
-								std::string path = "ux0:data/vitacord/cache/avatars/servers/" + discordPtr->guilds[i].icon + ".png";
-								criticalLogSD("loading from: " + path);
-								discordPtr->timelyIcon = vita2d_load_PNG_file(path.c_str());
-								discordPtr->serverIcons.push_back(discordPtr->timelyIcon);
-								criticalLogSD("DONE!");
+								/*if (!j_complete[i]["id"].is_null() && !j_complete[i]["avatar"].is_null()){*/
+									criticalLogSD("downloading icon to cache...");
+									std::ifstream file;
+									file.open("ux0:data/vitacord/cache/avatars/servers/" + discordPtr->guilds[i].icon + ".png");
+									if (file){
+										criticalLogSD("the file: " + discordPtr->guilds[i].icon + ".png already exists, skipping...");
+									}
+									else{
+										std::string webPath = "https://cdn.discordapp.com/icons/" + discordPtr->guilds[i].id + "/" + discordPtr->guilds[i].icon + ".png?size=48";
+										VitaNet::http_response downloadIconResponse = discordPtr->vitaNet.curlDiscordDownloadImage(webPath, discordPtr->token, "ux0:data/vitacord/cache/avatars/servers/" + discordPtr->guilds[i].icon + ".png");
+										criticalLogSD("Downloading from: " + webPath);
+									}
+									std::string path = "ux0:data/vitacord/cache/avatars/servers/" + discordPtr->guilds[i].icon + ".png";
+									criticalLogSD("loading from: " + path);
+									discordPtr->timelyIcon = vita2d_load_PNG_file(path.c_str());
+									discordPtr->serverIcons.push_back(discordPtr->timelyIcon);
+									criticalLogSD("DONE!");
+								//}
 
 							}
 						}
@@ -1171,22 +1173,24 @@ void * Discord::thread_loadData(void *arg){
 										logSD("avatar : " + discordPtr->directMessages[i].recipients[r].avatar);
 									}
 
-									criticalLogSD("\ndownloading DM icons to cache...");
-									std::ifstream file;
-									file.open("ux0:data/vitacord/cache/avatars/users/" + directMessages[i].recipients[r].avatar + ".png");
-									if (file){
-										criticalLogSD("the file: " + directMessages[i].recipients[r].avatar + ".png already exists, skipping...");
-									}
-									else{
-										std::string webPath = "https://cdn.discordapp.com/avatars/" + directMessages[i].recipients[r].id + "/" + directMessages[i].recipients[r].avatar + ".png?size=48";
-										VitaNet::http_response downloadIconResponse = vitaNet.curlDiscordDownloadImage(webPath, token, "ux0:data/vitacord/cache/avatars/users/" + directMessages[i].recipients[r].avatar + ".png");
-										criticalLogSD("downloading from: " + webPath);
-									}
-									std::string path = "ux0:data/vitacord/cache/avatars/users/" + directMessages[i].recipients[r].avatar + ".png";
-									criticalLogSD("loading from: " + path);
-									timelyDmIcon = vita2d_load_PNG_file(path.c_str());
-									dmIcons.push_back(timelyDmIcon);
-									criticalLogSD("DONE!");
+									//if (!j_complete[i]["recipients"][r]["id"].is_null() && !j_complete[i]["recipients"][r]["avatar"].is_null()){
+										criticalLogSD("\ndownloading DM icons to cache...");
+										std::ifstream file;
+										file.open("ux0:data/vitacord/cache/avatars/users/" + directMessages[i].recipients[r].avatar + ".png");
+										if (file){
+											criticalLogSD("the file: " + directMessages[i].recipients[r].avatar + ".png already exists, skipping...");
+										}
+										else{
+											std::string webPath = "https://cdn.discordapp.com/avatars/" + directMessages[i].recipients[r].id + "/" + directMessages[i].recipients[r].avatar + ".png?size=48";
+											VitaNet::http_response downloadIconResponse = vitaNet.curlDiscordDownloadImage(webPath, token, "ux0:data/vitacord/cache/avatars/users/" + directMessages[i].recipients[r].avatar + ".png");
+											criticalLogSD("downloading from: " + webPath);
+										}
+										std::string path = "ux0:data/vitacord/cache/avatars/users/" + directMessages[i].recipients[r].avatar + ".png";
+										criticalLogSD("loading from: " + path);
+										timelyDmIcon = vita2d_load_PNG_file(path.c_str());
+										dmIcons.push_back(timelyDmIcon);
+										criticalLogSD("DONE!");
+									//}
 
 
 									logSD("end of adding recipient.");
@@ -1237,6 +1241,7 @@ void Discord::LeaveDirectMessageChannel(){
 	currentDirectMessage = 0;
 	inDirectMessageChannel = false;
 
+	dmMessageIcons.clear();
 
 }
 void Discord::JoinDirectMessageChannel(int dIndex){
@@ -1254,7 +1259,11 @@ void Discord::getDirectMessageChannels(){
 	if(dmChannelsResponse.httpcode == 200){
 		try{
 			nlohmann::json j_complete = nlohmann::json::parse(dmChannelsResponse.body);
+
 			if(!j_complete.is_null()){
+
+				dmIcons.clear();
+
 				directMessages.clear();
 				int dmChannels = j_complete.size();
 				for(int i = 0; i < dmChannels; i++){
@@ -1305,17 +1314,20 @@ void Discord::getDirectMessageChannels(){
 								directMessages[i].recipients[r].avatar = "";
 							}
 							
-							/*
-							criticalLogSD("downloading DM icons to cache...");
-							std::string webPath = "https://cdn.discordapp.com/avatars/" + directMessages[i].recipients[r].id + "/" + directMessages[i].recipients[r].avatar + ".png?size=48";
-							VitaNet::http_response downloadIconResponse = vitaNet.curlDiscordDownloadImage(webPath, token, "ux0:data/vitacord/cache/avatars/users/" + directMessages[i].recipients[r].avatar + ".png");
-							criticalLogSD("downloading from: " + webPath);
-							std::string path = "ux0:data/vitacord/cache/avatars/users/" + directMessages[i].recipients[r].avatar + ".png";
-							criticalLogSD("downloading to: " + path);
-							timelyDmIcon = vita2d_load_PNG_file(path.c_str());
-							dmIcons.push_back(timelyDmIcon);
-							criticalLogSD("DONE!");
-							*/
+							
+							//if (!j_complete[i]["recipients"][r]["id"].is_null() && !j_complete[i]["recipients"][r]["avatar"].is_null()){
+								criticalLogSD("downloading DM icons to cache...");
+								std::string webPath = "https://cdn.discordapp.com/avatars/" + directMessages[i].recipients[r].id + "/" + directMessages[i].recipients[r].avatar + ".png?size=48";
+								VitaNet::http_response downloadIconResponse = vitaNet.curlDiscordDownloadImage(webPath, token, "ux0:data/vitacord/cache/avatars/users/" + directMessages[i].recipients[r].avatar + ".png");
+								criticalLogSD("downloading from: " + webPath);
+								std::string path = "ux0:data/vitacord/cache/avatars/users/" + directMessages[i].recipients[r].avatar + ".png";
+								criticalLogSD("downloading to: " + path);
+								timelyDmIcon = vita2d_load_PNG_file(path.c_str());
+								dmIcons.push_back(timelyDmIcon);
+								criticalLogSD("DONE!");
+							//}
+							
+							
 						}
 					}
 				}
@@ -1341,7 +1353,6 @@ bool Discord::refreshDirectMessages(){
 	currentTimeMS = osGetTimeMS();
 	if(currentTimeMS - lastFetchTimeMS > fetchTimeMS){
 		lastFetchTimeMS = osGetTimeMS();
-		dmMessageIcons.clear();
 		getDirectMessageChannels();
 		return true;
 	}
@@ -1362,12 +1373,12 @@ void Discord::getCurrentDirectMessages(){
 	std::string dmChannelUrl = "https://discordapp.com/api/v6/channels/" + directMessages[currentDirectMessage].id + "/messages";
 	VitaNet::http_response dmChannelResponse = vitaNet.curlDiscordGet(dmChannelUrl , token);
 
-	dmMessageIcons.clear();
-
 	if(dmChannelResponse.httpcode == 200){
 		try{
 			nlohmann::json j_complete = nlohmann::json::parse(dmChannelResponse.body);
+
 			if(!j_complete.is_null()){
+
 				directMessages[currentDirectMessage].messages.clear();
 				int msgAmount = j_complete.size();
 				for(int i = 0; i < msgAmount; i++){
@@ -1416,22 +1427,24 @@ void Discord::getCurrentDirectMessages(){
 						directMessages[currentDirectMessage].messages[i].author.avatar = "";
 					}
 
-					criticalLogSD("\ndownloading DM avatars to cache...");
-					std::ifstream file;
-					file.open("ux0:data/vitacord/cache/avatars/users/" + directMessages[currentDirectMessage].messages[i].author.avatar + ".png");
-					if (file){
-						criticalLogSD("the file: " + directMessages[currentDirectMessage].messages[i].author.avatar + ".png already exists, skipping...");
-					}
-					else{
-						std::string webPath = "https://cdn.discordapp.com/avatars/" + directMessages[currentDirectMessage].messages[i].author.id + "/" + directMessages[currentDirectMessage].messages[i].author.avatar + ".png?size=48";
-						VitaNet::http_response downloadIconResponse = vitaNet.curlDiscordDownloadImage(webPath, token, "ux0:data/vitacord/cache/avatars/users/" + directMessages[currentDirectMessage].messages[i].author.avatar + ".png");
-						criticalLogSD("Downloading from: " + webPath);
-					}
-					std::string path = "ux0:data/vitacord/cache/avatars/users/" + directMessages[currentDirectMessage].messages[i].author.avatar + ".png";
-					criticalLogSD("loading from: " + path);
-					timelyDmMessageIcon = vita2d_load_PNG_file(path.c_str());
-					dmMessageIcons.push_back(timelyDmMessageIcon);
-					criticalLogSD("DONE!");
+					//if (!j_complete[i]["author"]["id"].is_null() && !j_complete[i]["author"]["avatar"].is_null()){
+						criticalLogSD("\ndownloading DM avatars to cache...");
+						std::ifstream file;
+						file.open("ux0:data/vitacord/cache/avatars/users/" + directMessages[currentDirectMessage].messages[i].author.avatar + ".png");
+						if (file){
+							criticalLogSD("the file: " + directMessages[currentDirectMessage].messages[i].author.avatar + ".png already exists, skipping...");
+						}
+						else{
+							std::string webPath = "https://cdn.discordapp.com/avatars/" + directMessages[currentDirectMessage].messages[i].author.id + "/" + directMessages[currentDirectMessage].messages[i].author.avatar + ".png?size=48";
+							VitaNet::http_response downloadIconResponse = vitaNet.curlDiscordDownloadImage(webPath, token, "ux0:data/vitacord/cache/avatars/users/" + directMessages[currentDirectMessage].messages[i].author.avatar + ".png");
+							criticalLogSD("Downloading from: " + webPath);
+						}
+						std::string path = "ux0:data/vitacord/cache/avatars/users/" + directMessages[currentDirectMessage].messages[i].author.avatar + ".png";
+						criticalLogSD("loading from: " + path);
+						timelyDmMessageIcon = vita2d_load_PNG_file(path.c_str());
+						dmMessageIcons.push_back(timelyDmMessageIcon);
+						criticalLogSD("DONE!");
+					//}
 				}
 			}
 		}catch(const std::exception& e){
