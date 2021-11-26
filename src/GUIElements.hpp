@@ -66,6 +66,7 @@ typedef struct{
 	std::string attachmentFullText;
 	
 	std::vector<m_emoji> emojis;
+	vita2d_texture *messageIcon;
 }messagebox;
 
 typedef struct{

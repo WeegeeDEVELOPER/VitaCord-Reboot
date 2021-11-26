@@ -26,8 +26,8 @@ class Discord{
 			std::string discriminator;
 			std::string id;
 			std::string avatar;
-			
 		}user;
+
 		typedef struct{
 			int codepoint;
 			int posX;
@@ -35,6 +35,7 @@ class Discord{
 			int spriteSheetX;
 			int spriteSheetY;
 		} message_emoji;
+
 		typedef struct {
 			
 			bool isEmpty ;
@@ -56,6 +57,7 @@ class Discord{
 			vita2d_texture * thumbnail;
 			 
 		}message_attachment;
+
 		typedef struct {
 			user author;
 			std::string content;
@@ -68,12 +70,14 @@ class Discord{
 			//std::string avatar;
 			std::vector<message_emoji> emojis;
 		}message;
+
 		typedef struct{
 			int allow;
 			std::string type;
 			std::string id;
 			int deny;
 		} permission_overwrite;
+
 		typedef struct {
 			std::string name;
 			std::string last_pin_timestamp;
@@ -90,6 +94,7 @@ class Discord{
 			
 			std::deque<message> messages;
 		}channel;
+
 		typedef struct {
 			bool owner;
 			int permissions;
@@ -99,13 +104,19 @@ class Discord{
 			std::vector<channel> channels;
 			std::vector<std::string> myroles;
 			std::vector<int> rolecolors; //hex, must be converted to rgb code
+
+			vita2d_texture *serverIcon;
+			//std::vector<vita2d_texture*> serverIcon;
 		}guild;
+
 		typedef struct {
 			std::string last_message_id;
 			long type;
 			std::string id;
 			std::vector<user> recipients;
 			std::vector<message> messages;
+			vita2d_texture *avatarIcon;
+			vita2d_texture *dmIcon;
 		}directMessage;
 				
 		typedef struct {
@@ -182,18 +193,6 @@ class Discord{
 		std::unordered_map<int, emoji>::iterator emojiMapIterator;
 		int emojiCount;
 		std::vector<int> emojiTestArray;
-
-		vita2d_texture *timelyIcon;
-		std::vector<vita2d_texture*> serverIcons;
-
-		vita2d_texture *timelyDmIcon;
-		std::vector<vita2d_texture*> dmIcons;
-
-		vita2d_texture *timelyMessageIcon;
-		std::vector<vita2d_texture*> messageIcons;
-
-		vita2d_texture *timelyDmMessageIcon;
-		std::vector<vita2d_texture*> dmMessageIcons;
 
 		vita2d_texture *userIcon;
 	private:

@@ -1213,8 +1213,8 @@ void VitaGUI::DrawGuildsOnSidebar(){
 			vita2d_font_draw_text(vita2dFont[GUILD_TITLE_TEXT_SIZE_PIXEL] , guildScrollX + 58, 100 + guildScrollY + i * GUILD_HEIGHT + 40, RGBA8(255,255,255,255), GUILD_TITLE_TEXT_SIZE_PIXEL, guildBoxes[i].name.c_str());
 		}
 		if (guildIconDefaultImage != NULL){
-			if (discordPtr->serverIcons[i] != NULL){
-				vita2d_draw_texture(discordPtr->serverIcons[i], 6, 68 + guildScrollY + i * GUILD_HEIGHT + 40);
+			if (discordPtr->guilds[i].serverIcon != NULL){
+				vita2d_draw_texture(discordPtr->guilds[i].serverIcon, 6, 68 + guildScrollY + i * GUILD_HEIGHT + 40);
 			}
 			else{
 				vita2d_draw_texture(userIconDefaultImage, 6, 68 + guildScrollY + i * GUILD_HEIGHT + 40);
@@ -1352,8 +1352,8 @@ void VitaGUI::DrawMessages(){
 
 
 			if (userIconDefaultImage != NULL){
-				if (discordPtr->messageIcons[i] != NULL){
-					vita2d_draw_texture(discordPtr->messageIcons[i], 243, yPos + 6);
+				if (messageBoxes[i].messageIcon != NULL){
+					vita2d_draw_texture(messageBoxes[i].messageIcon, 243, yPos + 6);
 				}
 				else{
 					vita2d_draw_texture(userIconDefaultImage, 243, yPos + 6);
@@ -1385,8 +1385,8 @@ void VitaGUI::DrawDirectMessageUsersOnSidebar(){
 			vita2d_font_draw_text(vita2dFont[CHANNEL_TITLE_TEXT_SIZE_PIXEL] , directMessageScrollX + 58, 100 + directMessageScrollY + i * CHANNEL_HEIGHT + 42, RGBA8(255,255,255,255), CHANNEL_TITLE_TEXT_SIZE_PIXEL, directMessageBoxes[i].name.c_str());
 			
 			if (guildIconDefaultImage != NULL){
-				if (discordPtr->dmIcons[i] != NULL){
-					vita2d_draw_texture(discordPtr->dmIcons[i], 6, 68 + directMessageScrollY + i * CHANNEL_HEIGHT + 42);
+				if (discordPtr->directMessages[i].dmIcon != NULL){
+					vita2d_draw_texture(discordPtr->directMessages[i].dmIcon, 6, 68 + directMessageScrollY + i * CHANNEL_HEIGHT + 42);
 				}
 				vita2d_draw_texture(guildIconDefaultImage, 6, 68 + directMessageScrollY + i * CHANNEL_HEIGHT + 42);
 			}
@@ -1432,8 +1432,8 @@ void VitaGUI::DrawDirectMessageMessages(){
 			// For now we'll just draw the default icon for all users.
 
 			if (userIconDefaultImage != NULL){
-				if (discordPtr->dmMessageIcons[i] != NULL){
-					vita2d_draw_texture(discordPtr->dmMessageIcons[i], 243, yPos + 6);
+				if (discordPtr->directMessages[i].avatarIcon != NULL){
+					vita2d_draw_texture(discordPtr->directMessages[i].avatarIcon, 243, yPos + 6);
 				}
 				else{
 					vita2d_draw_texture(userIconDefaultImage, 243, yPos + 6);
